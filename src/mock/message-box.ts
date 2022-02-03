@@ -71,6 +71,7 @@ const getMessageList = () => {
 };
 
 setupMock({
+  mock: true,
   setup: () => {
     Mock.mock(new RegExp('/api/message/list'), () => {
       return successResponseWrap(getMessageList());

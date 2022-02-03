@@ -16,15 +16,6 @@
     </div>
     <ul class="right-side">
       <li>
-        <a-tooltip :content="$t('settings.search')">
-          <a-button class="nav-btn" type="outline" :shape="'circle'">
-            <template #icon>
-              <icon-search />
-            </template>
-          </a-button>
-        </a-tooltip>
-      </li>
-      <li>
         <a-tooltip :content="$t('settings.language')">
           <a-button
             class="nav-btn"
@@ -49,27 +40,6 @@
             </a-doption>
           </template>
         </a-dropdown>
-      </li>
-      <li>
-        <a-tooltip
-          :content="
-            theme === 'light'
-              ? $t('settings.navbar.theme.toDark')
-              : $t('settings.navbar.theme.toLight')
-          "
-        >
-          <a-button
-            class="nav-btn"
-            type="outline"
-            :shape="'circle'"
-            @click="toggleTheme"
-          >
-            <template #icon>
-              <icon-moon-fill v-if="theme === 'dark'" />
-              <icon-sun-fill v-else />
-            </template>
-          </a-button>
-        </a-tooltip>
       </li>
       <li>
         <a-tooltip :content="$t('settings.navbar.alerts')">
@@ -97,6 +67,27 @@
             <message-box />
           </template>
         </a-popover>
+      </li>
+      <li>
+        <a-tooltip
+          :content="
+            theme === 'light'
+              ? $t('settings.navbar.theme.toDark')
+              : $t('settings.navbar.theme.toLight')
+          "
+        >
+          <a-button
+            class="nav-btn"
+            type="outline"
+            :shape="'circle'"
+            @click="toggleTheme"
+          >
+            <template #icon>
+              <icon-moon-fill v-if="theme === 'dark'" />
+              <icon-sun-fill v-else />
+            </template>
+          </a-button>
+        </a-tooltip>
       </li>
       <li>
         <a-tooltip :content="$t('settings.title')">
@@ -260,9 +251,11 @@ export default defineComponent({
   display: flex;
   padding-right: 20px;
   list-style: none;
+
   :deep(.locale-select) {
     border-radius: 20px;
   }
+
   li {
     display: flex;
     align-items: center;
@@ -273,16 +266,19 @@ export default defineComponent({
     color: var(--color-text-1);
     text-decoration: none;
   }
+
   .nav-btn {
-    border-color: rgb(var(--gray-2));
     color: rgb(var(--gray-8));
     font-size: 16px;
+    border-color: rgb(var(--gray-2));
   }
+
   .trigger-btn,
   .ref-btn {
     position: absolute;
     bottom: 14px;
   }
+
   .trigger-btn {
     margin-left: 14px;
   }

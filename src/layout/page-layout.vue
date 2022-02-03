@@ -138,6 +138,7 @@ export default defineComponent({
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
+
   :deep(.arco-menu) {
     ::-webkit-scrollbar {
       width: 12px;
@@ -145,10 +146,10 @@ export default defineComponent({
     }
 
     ::-webkit-scrollbar-thumb {
-      border: 4px solid transparent;
-      background-clip: padding-box;
-      border-radius: 7px;
       background-color: var(--color-text-4);
+      background-clip: padding-box;
+      border: 4px solid transparent;
+      border-radius: 7px;
     }
 
     ::-webkit-scrollbar-thumb:hover {

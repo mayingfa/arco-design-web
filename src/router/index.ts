@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, LocationQueryRaw } from 'vue-router';
-import NProgress from 'nprogress'; // progress bar
+import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 import usePermission from '@/hooks/permission';
@@ -16,7 +16,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login',
+      redirect: '/dashboard/workplace',
     },
     Login,
     {
@@ -31,17 +31,20 @@ const router = createRouter({
       component: () => import('@/views/not-found/index.vue'),
     },
   ],
-  scrollBehavior() {
-    return { top: 0 };
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { top: 0, left: 0 };
   },
 });
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
   const userStore = useUserStore();
-  async function crossroads() {
+  function crossroads() {
     const Permission = usePermission();
-    if (Permission.accessRouter(to)) await next();
+    if (Permission.accessRouter(to)) next();
     else {
       const destination = Permission.findFirstPermissionRoute(
         appRoutes,
@@ -49,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
       ) || {
         name: 'notFound',
       };
-      await next(destination);
+      next(destination);
     }
     NProgress.done();
   }

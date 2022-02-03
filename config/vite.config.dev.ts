@@ -1,13 +1,15 @@
-import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import svgLoader from 'vite-svg-loader';
 import eslint from 'vite-plugin-eslint';
+import svgLoader from 'vite-svg-loader';
 
 export default defineConfig({
   mode: 'development',
   server: {
+    host: '0.0.0.0',
+    port: 3000,
     open: true,
     fs: {
       strict: true,

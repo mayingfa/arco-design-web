@@ -127,11 +127,9 @@ export default defineComponent({
       <a-menu
         v-model:collapsed={collapsed.value}
         show-collapse-button
-        auto-open={false}
         selected-keys={selectedKey.value}
-        auto-open-selected={true}
+        auto-open-selected
         level-indent={34}
-        style="height: 100%"
         onCollapse={setCollapse}
       >
         {renderSubMenu()}
@@ -142,14 +140,32 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+.arco-menu {
+  height: 100%;
+}
+
 :deep(.arco-menu-inner) {
   .arco-menu-inline-header {
     display: flex;
     align-items: center;
+    user-select: none;
   }
+
+  .arco-menu-item {
+    user-select: none;
+  }
+
   .arco-icon {
     &:not(.arco-icon-down) {
       font-size: 18px;
+    }
+  }
+
+  .arco-menu-pop-header {
+    &:not(.arco-menu-has-icon) {
+      height: 40px;
+      white-space: normal;
+      text-overflow: clip;
     }
   }
 }

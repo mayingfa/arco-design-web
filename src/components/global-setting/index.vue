@@ -3,22 +3,20 @@
     :width="300"
     unmount-on-close
     :visible="visible"
-    :cancel-text="$t('settings.close')"
-    :ok-text="$t('settings.copySettings')"
+    cancel-text="关闭"
+    ok-text="复制配置"
     @ok="copySettings"
     @cancel="cancel"
   >
-    <template #title> {{ $t('settings.title') }} </template>
-    <Block :options="contentOpts" :title="$t('settings.content')" />
-    <Block :options="othersOpts" :title="$t('settings.otherSettings')" />
-    <a-alert>{{ $t('settings.alertContent') }}</a-alert>
+    <template #title> 页面配置 </template>
+    <Block :options="contentOpts" title="内容区域" />
+    <Block :options="othersOpts" title="其他设置" />
   </a-drawer>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { Message } from '@arco-design/web-vue';
-import { useI18n } from 'vue-i18n';
 import { useClipboard } from '@vueuse/core';
 import { useAppStore } from '@/store';
 import Block from './block.vue';
@@ -30,22 +28,21 @@ export default defineComponent({
   emits: ['cancel'],
   setup(props, { emit }) {
     const appStore = useAppStore();
-    const { t } = useI18n();
     const { copy } = useClipboard();
     const visible = computed(() => appStore.globalSettings);
     const contentOpts = [
-      { name: 'settings.navbar', key: 'navbar', defaultVal: true },
-      { name: 'settings.menu', key: 'menu', defaultVal: true },
-      { name: 'settings.footer', key: 'footer', defaultVal: true },
+      { name: '导航栏', key: 'navbar', defaultVal: true },
+      { name: '菜单栏', key: 'menu', defaultVal: true },
+      { name: '底部', key: 'footer', defaultVal: true },
       {
-        name: 'settings.menuWidth',
+        name: '菜单宽度 (px)',
         key: 'menuWidth',
         defaultVal: appStore.menuWidth,
         type: 'number',
       },
     ];
     const othersOpts = [
-      { name: 'settings.colorWeek', key: 'colorWeek', defaultVal: false },
+      { name: '色弱模式', key: 'colorWeek', defaultVal: false },
     ];
 
     const cancel = () => {
@@ -55,7 +52,7 @@ export default defineComponent({
     const copySettings = async () => {
       const text = JSON.stringify(appStore.$state, null, 2);
       await copy(text);
-      Message.success(t('settings.copySettings.message'));
+      Message.success('复制成功');
     };
     return {
       visible,

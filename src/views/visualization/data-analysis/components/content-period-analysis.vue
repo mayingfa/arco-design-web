@@ -1,9 +1,7 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '16px' }">
-      <template #title>
-        {{ $t('dataAnalysis.contentPeriodAnalysis') }}
-      </template>
+      <template #title> 内容时段分析 </template>
       <Chart style="width: 100%; height: 370px" :option="chartOption" />
     </a-card>
   </a-spin>

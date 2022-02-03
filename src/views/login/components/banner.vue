@@ -6,7 +6,7 @@
           <div :key="item.slogan" class="carousel-item">
             <div class="carousel-title">{{ item.slogan }}</div>
             <div class="carousel-sub-title">{{ item.subSlogan }}</div>
-            <img class="carousel-image" :src="item.image" />
+            <img class="carousel-image" :src="item.image" alt="" />
           </div>
         </a-carousel-item>
       </a-carousel>
@@ -16,26 +16,24 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import bannerImage from '@/assets/images/login-banner.png';
 
 export default defineComponent({
   setup() {
-    const { t } = useI18n();
     const carouselItem = computed(() => [
       {
-        slogan: t('login.banner.slogan1'),
-        subSlogan: t('login.banner.subSlogan1'),
+        slogan: '开箱即用的高质量模板',
+        subSlogan: '丰富的的页面模板，覆盖大多数典型业务场景',
         image: bannerImage,
       },
       {
-        slogan: t('login.banner.slogan2'),
-        subSlogan: t('login.banner.subSlogan2'),
+        slogan: '内置了常见问题的解决方案',
+        subSlogan: '国际化，路由配置，状态管理应有尽有',
         image: bannerImage,
       },
       {
-        slogan: t('login.banner.slogan3'),
-        subSlogan: t('login.banner.subSlogan3'),
+        slogan: '接入可视化增强工具AUX',
+        subSlogan: '实现灵活的区块式开发',
         image: bannerImage,
       },
     ]);

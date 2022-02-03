@@ -1,7 +1,7 @@
 <template>
   <a-card
     class="general-card"
-    :title="$t('multiDAnalysis.card.title.contentTypeDistribution')"
+    title="内容题材分布"
     :header-style="{ paddingBottom: 0 }"
   >
     <Chart style="height: 222px" :option="chartOption" />

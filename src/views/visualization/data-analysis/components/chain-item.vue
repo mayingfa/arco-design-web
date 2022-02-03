@@ -12,7 +12,7 @@
           />
           <div class="desc">
             <a-typography-text type="secondary" class="label">
-              {{ $t('dataAnalysis.card.yesterday') }}
+              较昨日
             </a-typography-text>
             <a-typography-text type="danger">
               {{ renderData.growth }}

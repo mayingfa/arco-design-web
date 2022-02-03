@@ -1,6 +1,5 @@
 <script lang="tsx">
 import { defineComponent, ref, watch, h, compile, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import {
   useRouter,
   useRoute,
@@ -13,7 +12,6 @@ import usePermission from '@/hooks/permission';
 export default defineComponent({
   emit: ['collapse'],
   setup() {
-    const { t } = useI18n();
     const appStore = useAppStore();
     const permission = usePermission();
     const router = useRouter();
@@ -103,13 +101,13 @@ export default defineComponent({
                 key={element?.name}
                 v-slots={{
                   title: () =>
-                    h(compile(`${icon}${t(element?.meta?.locale || '')}`)),
+                    h(compile(`${icon}${element?.meta?.locale || ''}`)),
                 }}
               >
                 {element?.children?.map((elem) => {
                   return (
                     <a-menu-item key={elem.name} onClick={() => goto(elem)}>
-                      {t(elem?.meta?.locale || '')}
+                      {elem?.meta?.locale || ''}
                       {travel(elem.children ?? [])}
                     </a-menu-item>
                   );
@@ -126,9 +124,10 @@ export default defineComponent({
     return () => (
       <a-menu
         v-model:collapsed={collapsed.value}
-        show-collapse-button
         selected-keys={selectedKey.value}
+        accordion
         auto-open-selected
+        show-collapse-button
         level-indent={34}
         onCollapse={setCollapse}
       >

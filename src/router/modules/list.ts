@@ -3,7 +3,7 @@ export default {
   name: 'list',
   component: () => import('@/views/list/index.vue'),
   meta: {
-    locale: 'menu.list',
+    locale: '列表页',
     requiresAuth: true,
     icon: 'icon-list',
   },
@@ -13,7 +13,7 @@ export default {
       name: 'searchTable',
       component: () => import('@/views/list/search-table/index.vue'),
       meta: {
-        locale: 'menu.list.searchTable',
+        locale: '查询表格',
         requiresAuth: true,
         role: ['*'],
       },
@@ -23,7 +23,7 @@ export default {
       name: 'card',
       component: () => import('@/views/list/card/index.vue'),
       meta: {
-        locale: 'menu.list.cardList',
+        locale: '卡片列表',
         requiresAuth: true,
         role: ['*'],
       },

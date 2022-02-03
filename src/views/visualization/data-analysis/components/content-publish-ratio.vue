@@ -1,11 +1,9 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '14px' }">
-      <template #title>
-        {{ $t('dataAnalysis.contentPublishRatio') }}
-      </template>
+      <template #title> 内容发布比例 </template>
       <template #extra>
-        <a-link>{{ $t('workplace.viewMore') }}</a-link>
+        <a-link> 查看更多 </a-link>
       </template>
       <Chart style="width: 100%; height: 347px" :option="chartOption" />
     </a-card>

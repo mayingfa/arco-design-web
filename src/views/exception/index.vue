@@ -18,8 +18,9 @@ export default defineComponent({});
   // height: 100%;
   // text-align: center;
   // background-color: var(--color-bg-1);
-  padding: 0 20px 20px 20px;
   height: calc(100% - 40px);
+  padding: 0 20px 20px 20px;
+
   :deep(.content) {
     position: relative;
     display: flex;

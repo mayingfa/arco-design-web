@@ -1,9 +1,6 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
-    <a-card
-      class="general-card"
-      :title="$t('multiDAnalysis.card.title.contentPublishingSource')"
-    >
+    <a-card class="general-card" title="内容发布来源">
       <Chart style="width: 100%; height: 300px" :option="chartOption" />
     </a-card>
   </a-spin>

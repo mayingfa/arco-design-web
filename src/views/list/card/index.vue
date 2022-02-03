@@ -1,30 +1,30 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.cardList']" />
+    <Breadcrumb :items="['列表页', '卡片列表']" />
     <a-row :gutter="20" align="stretch">
       <a-col :span="24">
-        <a-card class="general-card" :title="$t('menu.list.cardList')">
+        <a-card class="general-card" title="卡片列表">
           <a-row justify="space-between">
             <a-col :span="24">
               <a-tabs :default-active-tab="1" type="rounded">
-                <a-tab-pane key="1" :title="$t('cardList.tab.title.all')">
+                <a-tab-pane key="1" title="全部">
                   <QualityInspection />
                   <TheService />
                   <RulesPreset />
                 </a-tab-pane>
-                <a-tab-pane key="2" :title="$t('cardList.tab.title.content')">
+                <a-tab-pane key="2" title="内容质检">
                   <QualityInspection />
                 </a-tab-pane>
-                <a-tab-pane key="3" :title="$t('cardList.tab.title.service')">
+                <a-tab-pane key="3" title="开通服务">
                   <TheService />
                 </a-tab-pane>
-                <a-tab-pane key="4" :title="$t('cardList.tab.title.preset')">
+                <a-tab-pane key="4" title="规则预置">
                   <RulesPreset />
                 </a-tab-pane>
               </a-tabs>
             </a-col>
             <a-input-search
-              :placeholder="$t('cardList.searchInput.placeholder')"
+              placeholder="搜索"
               style="width: 240px; position: absolute; top: 60px; right: 10px"
             />
           </a-row>

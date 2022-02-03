@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.user', 'menu.user.info']" />
+    <Breadcrumb :items="['个人中心', '用户信息']" />
     <UserInfoHeader />
     <div class="content">
       <div class="content-left">
@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useI18n } from 'vue-i18n';
 import UserInfoHeader from './components/user-info-header.vue';
 import LatestNotification from './components/latest-notification.vue';
 import MyProject from './components/my-project.vue';
@@ -37,24 +36,22 @@ export default defineComponent({
     Myteam,
   },
   setup() {
-    const { t } = useI18n();
-
     const tabList = [
       {
         key: 'overview',
-        title: t('userInfo.tab.title.overview'),
+        title: '总览',
         icon: 'icon-face-smile-fill',
         component: 'Overview',
       },
       {
         key: 'project',
-        title: t('userInfo.tab.title.project'),
+        title: '项目',
         icon: 'icon-file',
         component: 'Overview',
       },
       {
         key: 'team',
-        title: t('userInfo.tab.title.team'),
+        title: '我的团队',
         icon: 'icon-user',
         component: 'Overview',
       },

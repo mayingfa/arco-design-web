@@ -1,15 +1,9 @@
 <template>
   <div class="content">
-    <a-result
-      class="result"
-      status="404"
-      :subtitle="$t('exception.result.404.description')"
-    >
+    <a-result class="result" status="404" subtitle="抱歉，页面不见了～">
     </a-result>
     <div class="operation-row">
-      <a-button key="back" type="primary" @click="back">
-        {{ $t('exception.result.404.back') }}
-      </a-button>
+      <a-button key="back" type="primary" @click="back"> 返回 </a-button>
     </div>
   </div>
 </template>

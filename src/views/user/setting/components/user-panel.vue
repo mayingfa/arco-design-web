@@ -12,7 +12,7 @@
             <template #trigger-icon>
               <icon-camera />
             </template>
-            <img v-if="fileItem.url" :src="fileItem.url" />
+            <img v-if="fileItem.url" :src="fileItem.url" alt="" />
             <icon-plus v-else />
           </a-avatar>
         </template>
@@ -33,13 +33,9 @@
           textAlign: 'left',
         }"
       >
-        <template #label="{ label }">{{ $t(label) }} :</template>
+        <template #label="{ label }">{{ label }} :</template>
         <template #value="{ value, data }">
-          <a-tag
-            v-if="data.label === 'userSetting.label.certification'"
-            color="green"
-            size="small"
-          >
+          <a-tag v-if="data.label === '实名认证'" color="green" size="small">
             已认证
           </a-tag>
           <span v-else>{{ value }}</span>
@@ -63,23 +59,23 @@ export default defineComponent({
     };
     const renderData = [
       {
-        label: 'userSetting.label.name',
+        label: '用户名',
         value: userStore.name,
       },
       {
-        label: 'userSetting.label.certification',
+        label: '实名认证',
         value: userStore.certification,
       },
       {
-        label: 'userSetting.label.accountId',
+        label: '账号ID',
         value: userStore.accountId,
       },
       {
-        label: 'userSetting.label.phone',
+        label: '手机号码',
         value: userStore.phone,
       },
       {
-        label: 'userSetting.label.registrationDate',
+        label: '注册时间',
         value: userStore.registrationDate,
       },
     ];
@@ -97,11 +93,13 @@ export default defineComponent({
   padding: 14px 0 4px 4px;
   border-radius: 4px;
 }
+
 :deep(.arco-avatar-trigger-icon-button) {
   width: 32px;
   height: 32px;
   line-height: 32px;
   background-color: #e8f3ff;
+
   .arco-icon-camera {
     margin-top: 8px;
     color: rgb(var(--arcoblue-6));

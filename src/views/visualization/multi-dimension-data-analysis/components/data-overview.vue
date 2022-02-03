@@ -1,9 +1,6 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
-    <a-card
-      class="general-card"
-      :title="$t('multiDAnalysis.card.title.dataOverview')"
-    >
+    <a-card class="general-card" title="数据总览">
       <a-row justify="space-between">
         <a-col v-for="(item, idx) in renderData" :key="idx" :span="6">
           <a-statistic
@@ -34,7 +31,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { LineSeriesOption } from 'echarts';
 import { queryDataOverview } from '@/api/visualization';
 import useLoading from '@/hooks/loading';
@@ -96,12 +92,11 @@ const generateSeries = (
 };
 export default defineComponent({
   setup() {
-    const { t } = useI18n();
     const { loading, setLoading } = useLoading(true);
     const { isDark } = useThemes();
     const renderData = computed(() => [
       {
-        title: t('multiDAnalysis.dataOverview.contentProduction'),
+        title: '内容生产量',
         value: 1902,
         prefix: {
           icon: 'icon-edit',
@@ -110,7 +105,7 @@ export default defineComponent({
         },
       },
       {
-        title: t('multiDAnalysis.dataOverview.contentClick'),
+        title: '内容点击量',
         value: 2445,
         prefix: {
           icon: 'icon-thumb-up',
@@ -119,7 +114,7 @@ export default defineComponent({
         },
       },
       {
-        title: t('multiDAnalysis.dataOverview.contentExposure'),
+        title: '内容曝光量',
         value: 3034,
         prefix: {
           icon: 'icon-heart',
@@ -128,7 +123,7 @@ export default defineComponent({
         },
       },
       {
-        title: t('multiDAnalysis.dataOverview.activeUsers'),
+        title: '活跃用户数',
         value: 1275,
         prefix: {
           icon: 'icon-user',
@@ -299,11 +294,13 @@ export default defineComponent({
     color: rgb(var(--gray-10));
     font-weight: bold;
   }
+
   .arco-statistic-value {
     display: flex;
     align-items: center;
   }
 }
+
 .statistic-prefix {
   display: inline-block;
   width: 32px;

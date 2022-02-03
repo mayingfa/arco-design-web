@@ -3,7 +3,7 @@ export default {
   name: 'dashboard',
   component: () => import('@/views/dashboard/index.vue'),
   meta: {
-    locale: 'menu.dashboard',
+    locale: '仪表盘',
     requiresAuth: true,
     icon: 'icon-dashboard',
   },
@@ -13,7 +13,7 @@ export default {
       name: 'workplace',
       component: () => import('@/views/dashboard/workplace/index.vue'),
       meta: {
-        locale: 'menu.dashboard.workplace',
+        locale: '工作台',
         requiresAuth: true,
         role: ['*'],
       },
@@ -23,7 +23,7 @@ export default {
       name: 'monitor',
       component: () => import('@/views/dashboard/monitor/index.vue'),
       meta: {
-        locale: 'menu.dashboard.monitor',
+        locale: '实时监控',
         requiresAuth: true,
         role: ['admin'],
       },

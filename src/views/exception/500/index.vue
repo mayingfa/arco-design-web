@@ -1,15 +1,13 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.exception', 'menu.exception.500']" />
+    <Breadcrumb :items="['异常页', '500']" />
     <div class="content">
       <a-result
         class="result"
         status="500"
-        :subtitle="$t('exception.result.500.description')"
+        subtitle="抱歉，服务器出了点问题～"
       />
-      <a-button key="back" type="primary">
-        {{ $t('exception.result.500.back') }}
-      </a-button>
+      <a-button key="back" type="primary"> 返回 </a-button>
     </div>
   </div>
 </template>

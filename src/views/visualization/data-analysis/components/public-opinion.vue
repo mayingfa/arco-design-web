@@ -1,13 +1,13 @@
 <template>
   <a-card
     class="general-card"
-    :title="$t('dataAnalysis.title.publicOpinion')"
+    title="舆情分析"
     :header-style="{ paddingBottom: '12px' }"
   >
     <a-row :gutter="12">
       <a-col :span="6">
         <ChainItem
-          :title="$t('dataAnalysis.card.title.allVisitors')"
+          title="访问总人次"
           quota="visitors"
           chart-type="line"
           :card-style="{
@@ -19,7 +19,7 @@
       </a-col>
       <a-col :span="6">
         <ChainItem
-          :title="$t('dataAnalysis.card.title.contentPublished')"
+          title="内容发布量"
           quota="published"
           chart-type="bar"
           :card-style="{
@@ -31,7 +31,7 @@
       </a-col>
       <a-col :span="6">
         <ChainItem
-          :title="$t('dataAnalysis.card.title.totalComment')"
+          title="评论总量"
           quota="comment"
           chart-type="line"
           :card-style="{
@@ -43,7 +43,7 @@
       </a-col>
       <a-col :span="6">
         <ChainItem
-          :title="$t('dataAnalysis.card.title.totalShare')"
+          title="分享总量"
           quota="share"
           chart-type="pie"
           :card-style="{

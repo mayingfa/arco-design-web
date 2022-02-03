@@ -1,12 +1,12 @@
 <template>
   <a-card
     class="general-card"
-    :title="$t('workplace.announcement')"
+    title="公告"
     :header-style="{ paddingBottom: '0' }"
     :body-style="{ paddingTop: '15px' }"
   >
     <template #extra>
-      <a-link>{{ $t('workplace.viewMore') }}</a-link>
+      <a-link> 查看更多 </a-link>
     </template>
     <a-space direction="vertical" :size="6">
       <a-space v-for="(item, idx) in list" :key="idx">

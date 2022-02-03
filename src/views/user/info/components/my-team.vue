@@ -1,7 +1,7 @@
 <template>
   <a-card
     class="general-card"
-    :title="$t('userInfo.tab.title.team')"
+    title="我的团队"
     :header-style="{ paddingBottom: '18px' }"
     :body-style="{ paddingBottom: '12px' }"
   >
@@ -24,7 +24,7 @@
         <a-list-item-meta v-else :title="team.name">
           <template #avatar>
             <a-avatar>
-              <img :src="team.avatar" />
+              <img :src="team.avatar" alt="团队头像" />
             </a-avatar>
           </template>
           <template #description> 共{{ team.peopleNumber }}人 </template>
@@ -57,14 +57,17 @@ export default defineComponent({
 <style scoped lang="less">
 .general-card {
   height: 356px;
+
   .arco-list-item {
     height: 72px;
-    padding-left: 0;
     padding-bottom: 12px;
+    padding-left: 0;
     border-bottom: 1px solid var(--color-neutral-3);
+
     &:last-child {
       border-bottom: none;
     }
+
     .arco-list-item-meta {
       padding: 0;
     }

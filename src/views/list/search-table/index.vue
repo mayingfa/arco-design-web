@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['列表页', '查询表格']" />
+    <a-card class="general-card" title="查询表格">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,53 +12,41 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item
-                  field="number"
-                  :label="$t('searchTable.form.number')"
-                >
+                <a-form-item field="number" label="集合编号">
                   <a-input
                     v-model="formModel.number"
-                    :placeholder="$t('searchTable.form.number.placeholder')"
+                    placeholder="请输入集合编号"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="name" :label="$t('searchTable.form.name')">
+                <a-form-item field="name" label="集合名称">
                   <a-input
                     v-model="formModel.name"
-                    :placeholder="$t('searchTable.form.name.placeholder')"
+                    placeholder="请输入集合名称"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="contentType"
-                  :label="$t('searchTable.form.contentType')"
-                >
+                <a-form-item field="contentType" label="内容体裁">
                   <a-select
                     v-model="formModel.contentType"
                     :options="contentTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
+                    placeholder="全部"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="filterType"
-                  :label="$t('searchTable.form.filterType')"
-                >
+                <a-form-item field="filterType" label="筛选方式">
                   <a-select
                     v-model="formModel.filterType"
                     :options="filterTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
+                    placeholder="全部"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="createdTime"
-                  :label="$t('searchTable.form.createdTime')"
-                >
+                <a-form-item field="createdTime" label="创建时间">
                   <a-range-picker
                     v-model="formModel.createdTime"
                     style="width: 100%"
@@ -66,14 +54,11 @@
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="status"
-                  :label="$t('searchTable.form.status')"
-                >
+                <a-form-item field="status" label="状态">
                   <a-select
                     v-model="formModel.status"
                     :options="statusOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
+                    placeholder="全部"
                   />
                 </a-form-item>
               </a-col>
@@ -87,13 +72,13 @@
               <template #icon>
                 <icon-search />
               </template>
-              {{ $t('searchTable.form.search') }}
+              查询
             </a-button>
             <a-button @click="reset">
               <template #icon>
                 <icon-refresh />
               </template>
-              {{ $t('searchTable.form.reset') }}
+              重置
             </a-button>
           </a-space>
         </a-col>
@@ -106,13 +91,11 @@
               <template #icon>
                 <icon-plus />
               </template>
-              {{ $t('searchTable.operation.create') }}
+              新建
             </a-button>
             <a-upload action="/">
               <template #upload-button>
-                <a-button>
-                  {{ $t('searchTable.operation.import') }}
-                </a-button>
+                <a-button> 批量导入 </a-button>
               </template>
             </a-upload>
           </a-space>
@@ -122,7 +105,7 @@
             <template #icon>
               <icon-download />
             </template>
-            {{ $t('searchTable.operation.download') }}
+            下载
           </a-button>
         </a-col>
       </a-row>
@@ -135,18 +118,9 @@
         @pageChange="onPageChange"
       >
         <template #columns>
-          <a-table-column
-            :title="$t('searchTable.columns.number')"
-            data-index="number"
-          />
-          <a-table-column
-            :title="$t('searchTable.columns.name')"
-            data-index="name"
-          />
-          <a-table-column
-            :title="$t('searchTable.columns.contentType')"
-            data-index="contentType"
-          >
+          <a-table-column title="集合编号" data-index="number" />
+          <a-table-column title="集合名称" data-index="name" />
+          <a-table-column title="内容体裁" data-index="contentType">
             <template #cell="{ record }">
               <a-space>
                 <a-avatar
@@ -175,44 +149,25 @@
                     src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image"
                   />
                 </a-avatar>
-                {{ $t(`searchTable.form.contentType.${record.contentType}`) }}
+                横板短视频
               </a-space>
             </template>
           </a-table-column>
-          <a-table-column
-            :title="$t('searchTable.columns.filterType')"
-            data-index="filterType"
-          >
-            <template #cell="{ record }">
-              {{ $t(`searchTable.form.filterType.${record.filterType}`) }}
-            </template>
+          <a-table-column title="筛选方式" data-index="filterType">
+            <template #cell> 人工筛选 </template>
           </a-table-column>
-          <a-table-column
-            :title="$t('searchTable.columns.count')"
-            data-index="count"
-          />
-          <a-table-column
-            :title="$t('searchTable.columns.createdTime')"
-            data-index="createdTime"
-          />
-          <a-table-column
-            :title="$t('searchTable.columns.status')"
-            data-index="status"
-          >
+          <a-table-column title="内容量" data-index="count" />
+          <a-table-column title="创建时间" data-index="createdTime" />
+          <a-table-column title="状态" data-index="status">
             <template #cell="{ record }">
               <span v-if="record.status === 'offline'" class="circle"></span>
               <span v-else class="circle pass"></span>
-              {{ $t(`searchTable.form.status.${record.status}`) }}
+              已上线
             </template>
           </a-table-column>
-          <a-table-column
-            :title="$t('searchTable.columns.operations')"
-            data-index="operations"
-          >
+          <a-table-column title="操作" data-index="operations">
             <template #cell>
-              <a-button type="text" size="small">
-                {{ $t('searchTable.columns.operations.view') }}
-              </a-button>
+              <a-button type="text" size="small"> 查看 </a-button>
             </template>
           </a-table-column>
         </template>
@@ -223,7 +178,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
 import useLoading from '@/hooks/loading';
 import { queryPolicyList, PolicyRecord, PolicyParams } from '@/api/list';
 import { Pagination, Options } from '@/types/global';
@@ -241,7 +195,6 @@ const generateFormModel = () => {
 export default defineComponent({
   setup() {
     const { loading, setLoading } = useLoading(true);
-    const { t } = useI18n();
     const renderData = ref<PolicyRecord[]>([]);
     const formModel = ref(generateFormModel());
     const basePagination: Pagination = {
@@ -253,35 +206,35 @@ export default defineComponent({
     });
     const contentTypeOptions = computed<Options[]>(() => [
       {
-        label: t('searchTable.form.contentType.img'),
+        label: '图文',
         value: 'img',
       },
       {
-        label: t('searchTable.form.contentType.horizontalVideo'),
+        label: '横版短视频',
         value: 'horizontalVideo',
       },
       {
-        label: t('searchTable.form.contentType.verticalVideo'),
+        label: '竖版小视频',
         value: 'verticalVideo',
       },
     ]);
     const filterTypeOptions = computed<Options[]>(() => [
       {
-        label: t('searchTable.form.filterType.artificial'),
+        label: '人工筛选',
         value: 'artificial',
       },
       {
-        label: t('searchTable.form.filterType.rules'),
+        label: '规则筛选',
         value: 'rules',
       },
     ]);
     const statusOptions = computed<Options[]>(() => [
       {
-        label: t('searchTable.form.status.online'),
+        label: '已上线',
         value: 'online',
       },
       {
-        label: t('searchTable.form.status.offline'),
+        label: '已下线',
         value: 'offline',
       },
     ]);

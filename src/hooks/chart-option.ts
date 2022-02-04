@@ -1,6 +1,6 @@
 import { computed, ComputedRef } from 'vue';
-import { EChartsOption } from 'echarts';
 import { useAppStore } from '@/store';
+import { EChartsOption } from 'echarts';
 
 // for code hints
 // import { SeriesOption } from 'echarts';

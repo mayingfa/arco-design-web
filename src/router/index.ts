@@ -1,16 +1,14 @@
 import { createRouter, createWebHistory, LocationQueryRaw } from 'vue-router';
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
-
-import usePermission from '@/hooks/permission';
 import { useUserStore } from '@/store';
+import 'nprogress/nprogress.css';
+import usePermission from '@/hooks/permission';
 import PageLayout from '@/layout/page-layout.vue';
 import { isLogin } from '@/utils/auth';
 import Login from './modules/login';
 import appRoutes from './modules';
 
-NProgress.configure({ showSpinner: false }); // NProgress Configuration
-
+NProgress.configure({ showSpinner: false });
 const router = createRouter({
   history: createWebHistory(),
   routes: [

@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'exception',
   name: 'exception',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '403',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
     {
@@ -25,7 +27,7 @@ export default {
       meta: {
         locale: '404',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
     {
@@ -35,7 +37,7 @@ export default {
       meta: {
         locale: '500',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
   ],

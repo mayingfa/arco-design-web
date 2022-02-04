@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'visualization',
   name: 'visualization',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '分析页',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
     {
@@ -26,7 +28,7 @@ export default {
       meta: {
         locale: '多维数据分析',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
   ],

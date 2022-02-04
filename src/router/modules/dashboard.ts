@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'dashboard',
   name: 'dashboard',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '工作台',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
     {
@@ -25,7 +27,7 @@ export default {
       meta: {
         locale: '实时监控',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
   ],

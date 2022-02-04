@@ -492,44 +492,6 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@intlify/core-base@9.2.0-beta.30":
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/@intlify/core-base/-/core-base-9.2.0-beta.30.tgz"
-  integrity sha512-tnOuI8gs4S7vv4WjG8oFL7vbZ4PM7Is/Ld3lRHQlBO7UjpnCVcQ94AgP/4F0cUPFn9JSPMQRN0aOOahW1BXvSA==
-  dependencies:
-    "@intlify/devtools-if" "9.2.0-beta.30"
-    "@intlify/message-compiler" "9.2.0-beta.30"
-    "@intlify/shared" "9.2.0-beta.30"
-    "@intlify/vue-devtools" "9.2.0-beta.30"
-
-"@intlify/devtools-if@9.2.0-beta.30":
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/@intlify/devtools-if/-/devtools-if-9.2.0-beta.30.tgz"
-  integrity sha512-3OxGFi6ooya9DFqX/JsxFjrj9nGYcDoo4CRGYSDqnC+xv4bnsyB5ekmaYBiVZtagCdZdSUMxbTFphl1WbtgNLQ==
-  dependencies:
-    "@intlify/shared" "9.2.0-beta.30"
-
-"@intlify/message-compiler@9.2.0-beta.30":
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/@intlify/message-compiler/-/message-compiler-9.2.0-beta.30.tgz"
-  integrity sha512-2kj/0nLIFrgiO86f9VifcUUcV8LdzXt4YYPIujx/LkTEQOuSFUo/bNiMaG1hyfiU/8mfq6tsaWKjoOZjeao1eQ==
-  dependencies:
-    "@intlify/shared" "9.2.0-beta.30"
-    source-map "0.6.1"
-
-"@intlify/shared@9.2.0-beta.30":
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/@intlify/shared/-/shared-9.2.0-beta.30.tgz"
-  integrity sha512-E1WHRTIlUEse3d/6t1pAagSXRxmeVeNIhx5kT80dfpYxw8lOnCWV9wLve2bq9Fkv+3TD2I5j+CdN7jvSl3LdsA==
-
-"@intlify/vue-devtools@9.2.0-beta.30":
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/@intlify/vue-devtools/-/vue-devtools-9.2.0-beta.30.tgz"
-  integrity sha512-hcqDfwP/oXVmVCaJ0RA+uv1WSCcd42/Y13S0bySmWZv2KamLcxiD7wYxp/MaECG/D4KZcSLkq/wDHTG7lhYf5Q==
-  dependencies:
-    "@intlify/core-base" "9.2.0-beta.30"
-    "@intlify/shared" "9.2.0-beta.30"
-
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.4"
   resolved "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.0.4.tgz"
@@ -919,7 +881,7 @@
     "@vue/compiler-dom" "3.2.29"
     "@vue/shared" "3.2.29"
 
-"@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.18", "@vue/devtools-api@^6.0.0-beta.21":
+"@vue/devtools-api@^6.0.0-beta.18", "@vue/devtools-api@^6.0.0-beta.21":
   version "6.0.0-beta.21.1"
   resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.0.0-beta.21.1.tgz"
   integrity sha512-FqC4s3pm35qGVeXRGOjTsRzlkJjrBLriDS9YXbflHLsfA9FrcKzIyWnLXoNm+/7930E8rRakXuAc2QkC50swAw==
@@ -5131,15 +5093,15 @@ source-map-url@^0.4.0:
   resolved "https://registry.npmjs.org/source-map-url/-/source-map-url-0.4.1.tgz"
   integrity sha512-cPiFOTLUKvJFIg4SKVScy4ilPPW6rFgMgfuZJPNoDuMs3nC1HbMUycBoJw77xFIp6z1UJQJOfx6C9GMH80DiTw==
 
-source-map@0.6.1, source-map@^0.6.1, source-map@~0.6.0:
-  version "0.6.1"
-  resolved "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
-  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-
 source-map@^0.5.0, source-map@^0.5.6:
   version "0.5.7"
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
+
+source-map@^0.6.1, source-map@~0.6.0:
+  version "0.6.1"
+  resolved "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 sourcemap-codec@1.4.8, sourcemap-codec@^1.4.4:
   version "1.4.8"
@@ -6108,16 +6070,6 @@ vue-eslint-parser@^7.10.0:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^6.3.0"
-
-vue-i18n@^9.2.0-beta.17:
-  version "9.2.0-beta.30"
-  resolved "https://registry.npmjs.org/vue-i18n/-/vue-i18n-9.2.0-beta.30.tgz"
-  integrity sha512-5DqrgG9ffgC7j3RRAfViC0WUcdz0C3Ix1qq1AyQItpF7UkSB6iSJGEjBG6KdspbRQq/8t1YzDx4JRXbL05l6ow==
-  dependencies:
-    "@intlify/core-base" "9.2.0-beta.30"
-    "@intlify/shared" "9.2.0-beta.30"
-    "@intlify/vue-devtools" "9.2.0-beta.30"
-    "@vue/devtools-api" "^6.0.0-beta.13"
 
 vue-router@4:
   version "4.0.12"

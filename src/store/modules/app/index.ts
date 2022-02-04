@@ -14,7 +14,7 @@ export const useAppStore = defineStore('app', {
   actions: {
     // Update app settings
     updateSettings(partial: Partial<AppState>) {
-      // @ts-ignore-next-line
+      // @ts-ignore
       this.$patch(partial);
     },
 

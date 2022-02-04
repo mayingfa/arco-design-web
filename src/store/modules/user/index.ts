@@ -6,6 +6,7 @@ import {
   LoginData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
+import { RoleEnum } from '@/enums/roleEnum';
 import { UserState } from './types';
 
 export const useUserStore = defineStore('user', {
@@ -25,7 +26,7 @@ export const useUserStore = defineStore('user', {
     registrationDate: undefined,
     accountId: undefined,
     certification: undefined,
-    role: '',
+    role: undefined,
   }),
 
   getters: {
@@ -37,7 +38,8 @@ export const useUserStore = defineStore('user', {
   actions: {
     switchRoles() {
       return new Promise((resolve) => {
-        this.role = this.role === 'user' ? 'admin' : 'user';
+        this.role =
+          this.role === RoleEnum.USER ? RoleEnum.ADMIN : RoleEnum.USER;
         resolve(this.role);
       });
     },
@@ -71,7 +73,6 @@ export const useUserStore = defineStore('user', {
     // Logout
     async logout() {
       await userLogout();
-
       this.resetInfo();
       clearToken();
     },

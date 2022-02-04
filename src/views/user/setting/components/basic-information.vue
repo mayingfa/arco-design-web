@@ -3,8 +3,8 @@
     ref="formRef"
     :model="formData"
     class="form"
-    :label-col-props="{ span: 8 }"
-    :wrapper-col-props="{ span: 16 }"
+    :label-col-props="{ span: 3 }"
+    :wrapper-col-props="{ span: 21 }"
   >
     <a-form-item
       field="email"
@@ -16,10 +16,7 @@
         },
       ]"
     >
-      <a-input
-        v-model="formData.email"
-        placeholder="请输入邮箱地址，如xxx{'@'}bytedance.com"
-      />
+      <a-input v-model="formData.email" placeholder="请输入邮箱地址" />
     </a-form-item>
     <a-form-item
       field="nickname"
@@ -60,25 +57,8 @@
       <a-cascader
         v-model="formData.area"
         placeholder="请选择"
-        :options="[
-          {
-            label: '北京',
-            value: 'beijing',
-            children: [
-              {
-                label: '北京',
-                value: 'beijing',
-                children: [
-                  {
-                    label: '朝阳',
-                    value: 'chaoyang',
-                  },
-                ],
-              },
-            ],
-          },
-        ]"
-        allow-clear
+        :options="CityAreas.address"
+        allow-search
       />
     </a-form-item>
     <a-form-item field="address" label="具体地址">
@@ -113,6 +93,7 @@
 import { defineComponent, ref } from 'vue';
 import { FormInstance } from '@arco-design/web-vue/es/form';
 import { BasicInfoModel } from '@/api/user-center';
+import CityAreas from '@/assets/json/city-areas.json';
 
 export default defineComponent({
   setup() {
@@ -140,6 +121,7 @@ export default defineComponent({
       formData,
       validate,
       reset,
+      CityAreas,
     };
   },
 });
@@ -147,7 +129,7 @@ export default defineComponent({
 
 <style scoped lang="less">
 .form {
-  width: 540px;
+  width: 900px;
   margin: 0 auto;
 }
 </style>

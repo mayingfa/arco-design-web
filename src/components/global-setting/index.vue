@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { Message } from '@arco-design/web-vue';
 import { useClipboard } from '@vueuse/core';
+import { Message } from '@arco-design/web-vue';
 import { useAppStore } from '@/store';
 import Block from './block.vue';
 
@@ -64,5 +64,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped lang="less"></style>

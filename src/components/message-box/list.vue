@@ -18,7 +18,7 @@
         <a-list-item-meta>
           <template v-if="item.avatar" #avatar>
             <a-avatar shape="circle">
-              <img v-if="item.avatar" :src="item.avatar" />
+              <img v-if="item.avatar" :src="item.avatar" alt="avatar" />
               <icon-desktop v-else />
             </a-avatar>
           </template>
@@ -27,6 +27,12 @@
               <span>{{ item.title }}</span>
               <a-typography-text type="secondary">
                 {{ item.subTitle }}
+              </a-typography-text>
+              <a-typography-text
+                v-if="item.type === 'message'"
+                class="time-text"
+              >
+                {{ item.time }}
               </a-typography-text>
             </a-space>
           </template>
@@ -38,12 +44,6 @@
                 }"
                 >{{ item.content }}</a-typography-paragraph
               >
-              <a-typography-text
-                v-if="item.type === 'message'"
-                class="time-text"
-              >
-                {{ item.time }}
-              </a-typography-text>
             </div>
           </template>
         </a-list-item-meta>
@@ -112,42 +112,56 @@ export default defineComponent({
     min-height: 86px;
     border-bottom: 1px solid rgb(var(--gray-3));
   }
+
   .arco-list-item-extra {
     position: absolute;
-    right: 20px;
+    top: 9px;
+    right: 10px;
   }
+
   .arco-list-item-meta-content {
     flex: 1;
   }
+
   .item-wrap {
     cursor: pointer;
   }
+
   .time-text {
-    font-size: 12px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
     color: rgb(var(--gray-6));
+    font-size: 12px;
   }
+
   .arco-list-footer {
+    height: 52px;
     padding: 0;
-    height: 50px;
     line-height: 50px;
-    // border-top: 1px solid rgb(var(--gray-3));
+
     .arco-space-item {
       width: 100%;
       border-right: 1px solid rgb(var(--gray-3));
+
       &:last-child {
         border-right: none;
       }
     }
+
     .add-border-top {
       border-top: 1px solid rgb(var(--gray-3));
     }
   }
+
   .footer-wrap {
     text-align: center;
   }
+
   .arco-typography {
     margin-bottom: 0;
   }
+
   .add-border {
     border-top: 1px solid rgb(var(--gray-3));
   }

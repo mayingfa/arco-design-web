@@ -1,5 +1,7 @@
 <template>
-  <a-layout-footer class="footer">Arco Pro</a-layout-footer>
+  <a-layout-footer class="footer">
+    Copyright © {{ new Date().getFullYear() }} Present Arco Design Starter
+  </a-layout-footer>
 </template>
 
 <script lang="ts">

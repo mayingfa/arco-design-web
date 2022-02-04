@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'list',
   name: 'list',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '查询表格',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
     {
@@ -25,7 +27,7 @@ export default {
       meta: {
         locale: '卡片列表',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
   ],

@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'user',
   name: 'user',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '用户信息',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
     {
@@ -25,7 +27,7 @@ export default {
       meta: {
         locale: '用户设置',
         requiresAuth: true,
-        role: ['*'],
+        role: [RoleEnum.All],
       },
     },
   ],

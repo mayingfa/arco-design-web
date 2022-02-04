@@ -37,7 +37,7 @@ export default defineComponent({
     const data: PreviewRecord[] = [
       {
         cover:
-          'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
+          'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
         name: '视频直播',
         duration: '00:05:19',
         id: '54e23ade',
@@ -46,9 +46,7 @@ export default defineComponent({
     ];
     const renderTag = (status: number) => {
       if (status === -1) {
-        return `<a-tag  color="red" class='data-statistic-list-cover-tag'>
-            审核未通过
-        </a-tag>`;
+        return `<a-tag  color="red" class='data-statistic-list-cover-tag'> 审核未通过 </a-tag>`;
       }
       return '';
     };
@@ -80,7 +78,7 @@ export default defineComponent({
             rowIndex: number;
           }) {
             const tmp = `<div class='data-statistic-list-cover-wrapper'>
-              <img src=${record.cover} />
+              <img src=${record.cover} alt="cover"/>
               ${renderTag(record.status)}
             </div>`;
             return h(compile(tmp));

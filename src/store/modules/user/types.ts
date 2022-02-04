@@ -1,4 +1,11 @@
-export type RoleType = '' | '*' | 'admin' | 'user';
+import { RoleEnum } from '@/enums/roleEnum';
+
+export type RoleType =
+  | undefined
+  | RoleEnum.All
+  | RoleEnum.ADMIN
+  | RoleEnum.USER;
+
 export interface UserState {
   name?: string;
   avatar?: string;

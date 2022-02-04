@@ -6,6 +6,7 @@ import setupMock, {
 
 import { MockParams } from '@/types/mock';
 import { isLogin } from '@/utils/auth';
+import { RoleEnum } from '@/enums/roleEnum';
 
 setupMock({
   mock: true,
@@ -49,13 +50,13 @@ setupMock({
         return failResponseWrap(null, 50000, '密码不能为空');
       }
       if (username === 'admin' && password === 'admin') {
-        window.localStorage.setItem('userRole', 'admin');
+        window.localStorage.setItem('userRole', RoleEnum.ADMIN);
         return successResponseWrap({
           token: '12345',
         });
       }
       if (username === 'user' && password === 'user') {
-        window.localStorage.setItem('userRole', 'user');
+        window.localStorage.setItem('userRole', RoleEnum.USER);
         return successResponseWrap({
           token: '54321',
         });

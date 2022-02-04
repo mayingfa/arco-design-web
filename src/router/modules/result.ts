@@ -1,3 +1,5 @@
+import { RoleEnum } from '@/enums/roleEnum';
+
 export default {
   path: 'result',
   name: 'result',
@@ -15,7 +17,7 @@ export default {
       meta: {
         locale: '成功页',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
     {
@@ -25,7 +27,7 @@ export default {
       meta: {
         locale: '失败页',
         requiresAuth: true,
-        role: ['admin'],
+        role: [RoleEnum.ADMIN],
       },
     },
   ],

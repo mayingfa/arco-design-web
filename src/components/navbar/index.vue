@@ -2,15 +2,12 @@
   <div class="navbar">
     <div class="left-side">
       <a-space>
-        <img
-          alt="logo"
-          src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
-        />
+        <img class="navbar-logo" :src="logImage" alt="logo" />
         <a-typography-title
           :style="{ margin: 0, fontSize: '18px' }"
           :heading="5"
         >
-          Arco Pro
+          Arco Design Starter
         </a-typography-title>
       </a-space>
     </div>
@@ -33,7 +30,7 @@
         <a-popover
           trigger="click"
           :arrow-style="{ display: 'none' }"
-          :content-style="{ padding: 0, minWidth: '400px' }"
+          :content-style="{ padding: 0, width: '412px' }"
           content-class="message-popover"
         >
           <div ref="refBtn" class="ref-btn"></div>
@@ -118,6 +115,7 @@ import { Message } from '@arco-design/web-vue';
 import { useDark, useToggle } from '@vueuse/core';
 import { useAppStore, useUserStore } from '@/store';
 import useUser from '@/hooks/user';
+import logImage from '@/assets/icons/arco-logo.svg?url';
 import MessageBox from '../message-box/index.vue';
 
 export default defineComponent({
@@ -141,7 +139,6 @@ export default defineComponent({
       valueLight: 'light',
       storageKey: 'arco-theme',
       onChanged(dark: boolean) {
-        // overridded default behavior
         appStore.toggleTheme(dark);
       },
     });
@@ -185,6 +182,7 @@ export default defineComponent({
       handleLogout,
       setDropDownVisible,
       switchRoles,
+      logImage,
     };
   },
 });
@@ -197,12 +195,44 @@ export default defineComponent({
   height: 100%;
   background-color: var(--color-bg-2);
   border-bottom: 1px solid var(--color-border);
+
+  .navbar-logo {
+    width: 33px;
+    height: 33px;
+  }
 }
 
 .left-side {
   display: flex;
   align-items: center;
   padding-left: 20px;
+}
+
+:deep(.arco-list) {
+  .arco-list-content {
+    max-height: 258px;
+    overflow-y: auto;
+
+    .arco-list-item {
+      position: relative;
+    }
+  }
+
+  .arco-list-content::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  .arco-list-content::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    background-clip: padding-box;
+    border-radius: 2em;
+  }
+
+  .arco-list-content::-webkit-scrollbar-track-piece {
+    background-color: #f8f8f8;
+    border-radius: 2em;
+  }
 }
 
 .right-side {

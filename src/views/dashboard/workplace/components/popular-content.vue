@@ -98,15 +98,19 @@ export default defineComponent({
 .general-card {
   min-height: 388px;
 }
+
 :deep(.arco-table-tr) {
   height: 44px;
+
   .arco-typography {
     margin-bottom: 0;
   }
 }
+
 .increases-cell {
   display: flex;
   align-items: center;
+
   span {
     margin-right: 4px;
   }

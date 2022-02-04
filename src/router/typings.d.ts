@@ -2,13 +2,10 @@ import 'vue-router';
 
 declare module 'vue-router' {
   interface RouteMeta {
-    // options
     role?: string[];
-    // every route must declare
-    requiresAuth: boolean; // need login
+    requiresAuth: boolean;
     icon?: string;
     locale?: string;
-    // menu select key
     menuSelectKey?: string;
   }
 }

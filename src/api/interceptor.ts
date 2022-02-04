@@ -34,10 +34,9 @@ axios.interceptors.response.use(
         response.config.url !== '/api/user/info'
       ) {
         Modal.error({
-          title: 'Confirm logout',
-          content:
-            'You have been logged out, you can cancel to stay on this page, or log in again',
-          okText: 'Re-Login',
+          title: '确认注销',
+          content: '您已退出登录，请重新登录',
+          okText: '确定',
           async onOk() {
             const userStore = useUserStore();
             await userStore.logout();

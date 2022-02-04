@@ -75,7 +75,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%;
-  // padding: 20px;
   background-color: var(--color-bg-2);
 
   &-content {

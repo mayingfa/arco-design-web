@@ -153,7 +153,7 @@ const rulesPresetList: ServiceRecord[] = [
 
 setupMock({
   setup() {
-    // Quality Inspection
+    // 内容质检
     Mock.mock(new RegExp('/api/list/quality-inspection'), () => {
       return successResponseWrap(
         qualityInspectionList.map((_, index) => ({
@@ -163,7 +163,7 @@ setupMock({
       );
     });
 
-    // the service
+    // 开通服务
     Mock.mock(new RegExp('/api/list/the-service'), () => {
       return successResponseWrap(
         theServiceList.map((_, index) => ({
@@ -173,7 +173,7 @@ setupMock({
       );
     });
 
-    // rules preset
+    // 规则预置
     Mock.mock(new RegExp('/api/list/rules-preset'), () => {
       return successResponseWrap(
         rulesPresetList.map((_, index) => ({

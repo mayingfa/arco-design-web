@@ -69,8 +69,7 @@ export default defineComponent({
             },
             interval(idx: number) {
               if (idx === 0) return false;
-              if (idx === xAxis.value.length - 1) return false;
-              return true;
+              return idx !== xAxis.value.length - 1;
             },
           },
           axisLabel: {

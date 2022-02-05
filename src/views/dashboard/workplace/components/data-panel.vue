@@ -77,10 +77,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import infoImage from '@/assets/svg/info.svg?url';
-import riseImage from '@/assets/svg/rise.svg?url';
-import contentImage from '@/assets/svg/content.svg?url';
-import messageImage from '@/assets/svg/message.svg?url';
+import infoImage from '@/assets/icons/info.svg?url';
+import riseImage from '@/assets/icons/rise.svg?url';
+import contentImage from '@/assets/icons/content.svg?url';
+import messageImage from '@/assets/icons/message.svg?url';
 
 export default defineComponent({
   setup() {

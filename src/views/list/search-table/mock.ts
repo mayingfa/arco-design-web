@@ -3,8 +3,6 @@ import qs from 'query-string';
 import setupMock, { successResponseWrap } from '@/utils/setup-mock';
 import { GetParams } from '@/types/global';
 
-const { Random } = Mock;
-
 const data = Mock.mock({
   'list|55': [
     {
@@ -15,7 +13,7 @@ const data = Mock.mock({
       'count|2-3': /[0-9]/,
       'status|1': ['online', 'offline'],
       'filterType|1': ['artificial', 'rules'],
-      'createdTime': Random.datetime(),
+      'createdTime': "@date('yyyy-MM-dd HH:mm:ss')",
     },
   ],
 });

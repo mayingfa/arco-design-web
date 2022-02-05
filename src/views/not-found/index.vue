@@ -16,7 +16,6 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const back = () => {
-      // warning： Go to the node that has the permission
       router.push({ name: 'workplace' });
     };
     return {
@@ -28,12 +27,11 @@ export default defineComponent({
 
 <style scoped lang="less">
 .content {
-  // padding-top: 100px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -95px;
   margin-top: -121px;
+  margin-left: -95px;
   text-align: center;
 }
 </style>

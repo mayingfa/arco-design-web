@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <div class="logo">
-      <img
-        alt="logo"
-        src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
-      />
+      <img :src="logoIcon" alt="logo" />
       <div class="logo-text">Arco Design Pro</div>
     </div>
     <LoginBanner />
@@ -22,6 +19,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Footer from '@/components/footer/index.vue';
+import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import LoginBanner from './components/banner.vue';
 import LoginForm from './components/login-form.vue';
 
@@ -30,6 +28,11 @@ export default defineComponent({
     LoginBanner,
     LoginForm,
     Footer,
+  },
+  setup() {
+    return {
+      logoIcon,
+    };
   },
 });
 </script>

@@ -43,8 +43,8 @@ export default defineComponent({
 
 <style scoped lang="less">
 .container {
-  padding: 0 20px 20px 20px;
   margin-bottom: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 .space-unit {
@@ -54,8 +54,9 @@ export default defineComponent({
 
 .title-fix {
   margin: 0 0 12px 0;
-  font-size: 14;
+  font-size: 14px;
 }
+
 :deep(.section-titile) {
   margin: 0 0 12px 0;
   font-size: 14px;

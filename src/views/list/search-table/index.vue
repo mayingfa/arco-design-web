@@ -123,33 +123,24 @@
           <a-table-column title="内容体裁" data-index="contentType">
             <template #cell="{ record }">
               <a-space>
-                <a-avatar
-                  v-if="record.contentType === 'img'"
-                  :size="16"
-                  shape="square"
-                >
-                  <img
-                    alt="avatar"
-                    src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image"
-                  />
-                </a-avatar>
-                <a-avatar
-                  v-else-if="record.contentType === 'horizontalVideo'"
-                  :size="16"
-                  shape="square"
-                >
-                  <img
-                    alt="avatar"
-                    src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77721e365eb2ab786c889682cbc721c1.svg~tplv-49unhts6dw-image.image"
-                  />
-                </a-avatar>
-                <a-avatar v-else :size="16" shape="square">
-                  <img
-                    alt="avatar"
-                    src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image"
-                  />
-                </a-avatar>
-                横板短视频
+                <div v-if="record.contentType === 'img'">
+                  <a-avatar :size="16" shape="square">
+                    <img :src="pictureIcon" alt="icon" />
+                  </a-avatar>
+                  图文
+                </div>
+                <div v-else-if="record.contentType === 'horizontalVideo'">
+                  <a-avatar :size="16" shape="square">
+                    <img :src="horizontalVideoIcon" alt="avatar" />
+                  </a-avatar>
+                  横板短视频
+                </div>
+                <div v-else>
+                  <a-avatar :size="16" shape="square">
+                    <img :src="verticalVideoIcon" alt="avatar" />
+                  </a-avatar>
+                  竖版小视频
+                </div>
               </a-space>
             </template>
           </a-table-column>
@@ -162,7 +153,7 @@
             <template #cell="{ record }">
               <span v-if="record.status === 'offline'" class="circle"></span>
               <span v-else class="circle pass"></span>
-              已上线
+              {{ record.status === 'offline' ? '已下线' : '已上线' }}
             </template>
           </a-table-column>
           <a-table-column title="操作" data-index="operations">
@@ -181,6 +172,9 @@ import { defineComponent, computed, ref, reactive } from 'vue';
 import useLoading from '@/hooks/loading';
 import { queryPolicyList, PolicyRecord, PolicyParams } from '@/api/list';
 import { Pagination, Options } from '@/types/global';
+import pictureIcon from '@/assets/icons/picture.svg?url';
+import horizontalVideoIcon from '@/assets/icons/video-horizontal.svg?url';
+import verticalVideoIcon from '@/assets/icons/video-vertical.svg?url';
 
 const generateFormModel = () => {
   return {
@@ -279,12 +273,26 @@ export default defineComponent({
       contentTypeOptions,
       filterTypeOptions,
       statusOptions,
+      pictureIcon,
+      horizontalVideoIcon,
+      verticalVideoIcon,
     };
   },
 });
 </script>
 
 <style scoped lang="less">
+:deep(.arco-avatar) {
+  vertical-align: text-bottom;
+  background-color: unset;
+  cursor: default;
+  user-select: none;
+
+  .arco-avatar-image {
+    overflow: revert;
+  }
+}
+
 :deep(.arco-table-th) {
   &:last-child {
     .arco-table-th-item-title {

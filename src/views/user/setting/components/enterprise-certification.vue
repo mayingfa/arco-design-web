@@ -107,11 +107,13 @@ export default defineComponent({
   padding: 20px;
   background-color: rgb(var(--gray-1));
 }
+
 .item-label {
   min-width: 98px;
-  text-align: right;
   color: var(--color-text-8);
-  &:after {
+  text-align: right;
+
+  &::after {
     content: ':';
   }
 }

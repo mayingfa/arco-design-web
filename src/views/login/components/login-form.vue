@@ -1,7 +1,6 @@
 <template>
   <div class="login-form-wrapper">
     <div class="login-form-title"> 登录 Arco Design Pro </div>
-    <div class="login-form-sub-title"> 登录 Arco Design Pro </div>
     <div class="login-form-error-msg">{{ errorMessage }}</div>
     <a-form
       ref="loginForm"

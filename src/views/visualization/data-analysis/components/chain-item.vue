@@ -259,23 +259,27 @@ export default defineComponent({
 :deep(.arco-card-body) {
   height: 134px;
 }
+
 .content-wrap {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
   align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
   white-space: nowrap;
 }
+
 :deep(.content) {
   display: inline-block;
   height: 102px;
 }
+
 :deep(.arco-statistic) {
   .arco-statistic-title {
-    font-size: 16px;
     font-weight: bold;
+    font-size: 16px;
     white-space: nowrap;
   }
+
   .arco-statistic-content {
     margin-top: 10px;
   }
@@ -283,7 +287,6 @@ export default defineComponent({
 
 .chart {
   display: inline-block;
-  // width: calc(100% - 150px);
   flex: 1;
   height: 90px;
   vertical-align: bottom;

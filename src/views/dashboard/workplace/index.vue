@@ -11,12 +11,12 @@
           <PopularContent />
         </a-col>
         <a-col :flex="1" class="panel">
-          <CateforiesPercent />
+          <CategoriesPercent />
         </a-col>
       </a-row>
     </div>
     <div class="right-side">
-      <div class="panel moduler-wrap">
+      <div class="panel module-wrap">
         <QuickOperation />
         <RecentlyVisited />
       </div>
@@ -39,7 +39,7 @@ import Banner from './components/banner.vue';
 import DataPanel from './components/data-panel.vue';
 import ContentChart from './components/content-chart.vue';
 import PopularContent from './components/popular-content.vue';
-import CateforiesPercent from './components/categories-percent.vue';
+import CategoriesPercent from './components/categories-percent.vue';
 import RecentlyVisited from './components/recently-visited.vue';
 import QuickOperation from './components/quick-operation.vue';
 import Announcement from './components/announcement.vue';
@@ -52,7 +52,7 @@ export default defineComponent({
     DataPanel,
     ContentChart,
     PopularContent,
-    CateforiesPercent,
+    CategoriesPercent,
     RecentlyVisited,
     QuickOperation,
     Announcement,
@@ -64,10 +64,9 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .container {
-  background-color: var(--color-fill-2);
-  padding: 16px 20px;
-  padding-bottom: 0;
   display: flex;
+  padding: 16px 20px 0;
+  background-color: var(--color-fill-2);
 }
 
 .left-side {
@@ -81,21 +80,37 @@ export default defineComponent({
 }
 
 .panel {
+  overflow: auto;
   background-color: var(--color-bg-2);
   border-radius: 4px;
-  overflow: auto;
 }
+
 :deep(.panel-border) {
   margin-bottom: 0;
   border-bottom: 1px solid rgb(var(--gray-2));
 }
-.moduler-wrap {
+
+:deep(.icon) {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+  color: rgb(var(--dark-gray-1));
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center;
+  background-color: rgb(var(--gray-1));
   border-radius: 4px;
+}
+
+.module-wrap {
   background-color: var(--color-bg-2);
+  border-radius: 4px;
+
   :deep(.text) {
+    color: rgb(var(--gray-8));
     font-size: 12px;
     text-align: center;
-    color: rgb(var(--gray-8));
   }
 
   :deep(.wrapper) {
@@ -108,28 +123,17 @@ export default defineComponent({
         margin-bottom: 0;
       }
     }
+
     &:hover {
       .icon {
         color: rgb(var(--arcoblue-6));
         background-color: #e8f3ff;
       }
+
       .text {
         color: rgb(var(--arcoblue-6));
       }
     }
-  }
-
-  :deep(.icon) {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    margin-bottom: 4px;
-    color: rgb(var(--dark-gray-1));
-    line-height: 32px;
-    font-size: 16px;
-    text-align: center;
-    background-color: rgb(var(--gray-1));
-    border-radius: 4px;
   }
 }
 </style>

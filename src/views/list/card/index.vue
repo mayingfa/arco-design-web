@@ -25,7 +25,7 @@
             </a-col>
             <a-input-search
               placeholder="搜索"
-              style="width: 240px; position: absolute; top: 60px; right: 10px"
+              style="position: absolute; top: 60px; right: 10px; width: 240px"
             />
           </a-row>
         </a-card>
@@ -53,22 +53,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
-.container {
-  :deep(.arco-list-content) {
-    overflow-x: hidden;
-  }
-
-  :deep(.arco-card-meta-title) {
-    font-size: 14px;
-  }
-}
-:deep(.arco-list-col) {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 :deep(.arco-list-item) {
   width: 33%;
 }
@@ -77,19 +61,39 @@ export default defineComponent({
   margin: 0 0 12px 0;
   font-size: 14px;
 }
-:deep(.list-wrap) {
-  // min-height: 140px;
-  .list-row {
-    align-items: stretch;
-    .list-col {
-      margin-bottom: 16px;
-    }
+
+:deep(.arco-list-col) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container {
+  :deep(.arco-list-content) {
+    overflow-x: hidden;
   }
-  :deep(.arco-space) {
-    width: 100%;
-    .arco-space-item {
-      &:last-child {
-        flex: 1;
+
+  :deep(.arco-card-meta-title) {
+    font-size: 14px;
+  }
+
+  :deep(.list-wrap) {
+    .list-row {
+      align-items: stretch;
+
+      .list-col {
+        margin-bottom: 16px;
+      }
+    }
+
+    :deep(.arco-space) {
+      width: 100%;
+
+      .arco-space-item {
+        &:last-child {
+          flex: 1;
+        }
       }
     }
   }

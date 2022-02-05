@@ -50,8 +50,8 @@ export default defineComponent({
 }
 
 .wrapper {
-  padding: 20px 0 0 20px;
   min-height: 580px;
+  padding: 20px 0 0 20px;
   background-color: var(--color-bg-2);
   border-radius: 4px;
 }

@@ -7,6 +7,7 @@ import {
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { RoleEnum } from '@/enums/roleEnum';
+import boyAvatar from '@/assets/svg/avatar-boy.svg?url';
 import { UserState } from './types';
 
 export const useUserStore = defineStore('user', {
@@ -56,6 +57,9 @@ export const useUserStore = defineStore('user', {
     // Get user's information
     async info() {
       const res = await getUserInfo();
+      if (!res.data.avatar) {
+        res.data.avatar = boyAvatar;
+      }
       this.setInfo(res.data);
     },
 

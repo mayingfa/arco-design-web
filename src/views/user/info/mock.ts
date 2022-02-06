@@ -139,7 +139,7 @@ setupMock({
             '今日头条产品设计团队',
           ],
           'peopleNumber|1-10': 100,
-          'avatar': '@dataImage(100x100,电影图片)',
+          'avatar': '@dataImage(70x70,团队头像)',
         },
       ],
     });

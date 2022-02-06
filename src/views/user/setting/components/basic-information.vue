@@ -130,6 +130,6 @@ export default defineComponent({
 <style scoped lang="less">
 .form {
   width: 900px;
-  margin: 0 auto;
+  margin: 20px 0;
 }
 </style>

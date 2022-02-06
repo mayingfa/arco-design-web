@@ -4,8 +4,14 @@
     :style="{ backgroundImage: 'url(' + userInfoBackgroundImage + ')' }"
   >
     <a-space class="user-card" :size="10" direction="vertical" align="center">
-      <a-avatar :size="64">
-        <img :src="userInfo.avatar" alt="avatar" />
+      <a-avatar
+        :size="64"
+        :style="{
+          backgroundColor: userInfo.avatar ? '#c9cdd4' : '#3370ff',
+        }"
+      >
+        <img v-if="userInfo.avatar" :src="userInfo.avatar" alt="avatar" />
+        <IconUser v-else />
       </a-avatar>
       <div class="user-info">
         <a-typography-title :heading="6" style="margin: 0">

@@ -74,8 +74,15 @@
       </li>
       <li>
         <a-dropdown trigger="click">
-          <a-avatar :size="32" :style="{ marginRight: '8px' }">
-            <img alt="avatar" :src="avatar" />
+          <a-avatar
+            :size="32"
+            :style="{
+              marginRight: '8px',
+              backgroundColor: avatar ? '#c9cdd4' : '#3370ff',
+            }"
+          >
+            <img v-if="avatar" :src="avatar" alt="头像" />
+            <IconUser v-else />
           </a-avatar>
           <template #content>
             <a-doption>

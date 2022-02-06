@@ -7,6 +7,7 @@ import setupMock, {
 import { MockParams } from '@/types/mock';
 import { isLogin } from '@/utils/auth';
 import { RoleEnum } from '@/enums/roleEnum';
+import boyAvatar from '@/assets/svg/avatar-boy.svg?url';
 
 setupMock({
   mock: true,
@@ -19,8 +20,7 @@ setupMock({
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
           name: '王立群',
-          avatar:
-            '//lf1-xgcdn-tos.pstatp.com/obj/vcloud/vadmin/start.8e0e4855ee346a46ccff8ff3e24db27b.png',
+          avatar: boyAvatar,
           email: 'wangliqun@email.com',
           job: 'frontend',
           jobName: '前端艺术家',

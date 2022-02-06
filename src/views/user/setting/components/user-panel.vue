@@ -1,19 +1,26 @@
 <template>
   <a-card :bordered="false">
-    <a-space :size="54">
+    <a-space :size="10">
       <a-upload
         action="/"
-        list-type="picture-card"
-        :file-list="fileList"
-        :limit="1"
+        :file-list="file ? [file] : []"
+        :show-file-list="false"
+        @change="onChange"
       >
-        <template #upload-item="{ fileItem }">
-          <a-avatar :size="100" class="info-avatar">
+        <template #upload-button>
+          <a-avatar
+            :size="100"
+            class="info-avatar"
+            trigger-type="mask"
+            :style="{
+              backgroundColor: file.url ? '#c9cdd4' : '#3370ff',
+            }"
+          >
             <template #trigger-icon>
               <icon-camera />
             </template>
-            <img v-if="fileItem.url" :src="fileItem.url" alt="" />
-            <icon-plus v-else />
+            <img v-if="file.url" :src="file.url" alt="" />
+            <icon-user v-else />
           </a-avatar>
         </template>
       </a-upload>
@@ -23,7 +30,7 @@
         align="right"
         layout="inline-horizontal"
         :label-style="{
-          width: '140px',
+          width: '100px',
           fontWeight: 'normal',
           color: 'rgb(var(--gray-8))',
         }"
@@ -46,17 +53,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useUserStore } from '@/store';
 
 export default defineComponent({
   setup() {
     const userStore = useUserStore();
-    const file = {
+    const file = reactive({
       uid: '-2',
       name: 'avatar.png',
       url: userStore.avatar,
-    };
+    });
     const renderData = [
       {
         label: '用户名',
@@ -79,10 +86,13 @@ export default defineComponent({
         value: userStore.registrationDate,
       },
     ];
-    const fileList = ref([file]);
+    const onChange = (_: any, currentFile: any) => {
+      file.url = URL.createObjectURL(currentFile.file);
+    };
     return {
-      fileList,
+      file,
       renderData,
+      onChange,
     };
   },
 });
@@ -92,18 +102,22 @@ export default defineComponent({
 .arco-card {
   padding: 14px 0 4px 4px;
   border-radius: 4px;
-}
 
-:deep(.arco-avatar-trigger-icon-button) {
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  background-color: #e8f3ff;
+  :deep(.arco-avatar-trigger-icon-button) {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #e8f3ff;
 
-  .arco-icon-camera {
-    margin-top: 8px;
-    color: rgb(var(--arcoblue-6));
-    font-size: 14px;
+    .arco-icon-camera {
+      margin-top: 8px;
+      color: rgb(var(--arcoblue-6));
+      font-size: 14px;
+    }
+  }
+
+  :deep(.arco-space-item:first-of-type) {
+    margin-left: 10px;
   }
 }
 </style>

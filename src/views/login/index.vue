@@ -7,7 +7,8 @@
     <LoginBanner />
     <div class="content">
       <div class="content-inner">
-        <LoginForm />
+        <LoginForm v-if="showLoginForm" @callRegister="callRegister" />
+        <RegisterForm v-else @callLogin="callLogin" />
       </div>
       <div class="footer">
         <Footer />
@@ -17,21 +18,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Footer from '@/components/footer/index.vue';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import LoginBanner from './components/banner.vue';
 import LoginForm from './components/login-form.vue';
+import RegisterForm from './components/register-form.vue';
 
 export default defineComponent({
   components: {
     LoginBanner,
     LoginForm,
+    RegisterForm,
     Footer,
   },
   setup() {
+    const showLoginForm = ref(true);
+    const callLogin = () => {
+      showLoginForm.value = true;
+    };
+    const callRegister = () => {
+      showLoginForm.value = false;
+    };
+
     return {
+      showLoginForm,
       logoIcon,
+      callLogin,
+      callRegister,
     };
   },
 });

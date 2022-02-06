@@ -6,11 +6,20 @@ export interface LoginData {
   password: string;
 }
 
+export interface PhoneLoginData {
+  phone: string;
+  authCode: string;
+}
+
 export interface LoginRes {
   token: string;
 }
 export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/user/login', data);
+}
+
+export function phoneLogin(data: PhoneLoginData) {
+  return axios.post<LoginRes>('/api/user/phone-login', data);
 }
 
 export function logout() {

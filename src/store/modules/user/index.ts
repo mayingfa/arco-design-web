@@ -4,6 +4,8 @@ import {
   logout as userLogout,
   getUserInfo,
   LoginData,
+  phoneLogin,
+  PhoneLoginData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { RoleEnum } from '@/enums/roleEnum';
@@ -27,7 +29,7 @@ export const useUserStore = defineStore('user', {
     registrationDate: undefined,
     accountId: undefined,
     certification: undefined,
-    role: undefined,
+    role: '',
   }),
 
   getters: {
@@ -67,6 +69,17 @@ export const useUserStore = defineStore('user', {
     async login(loginForm: LoginData) {
       try {
         const res = await userLogin(loginForm);
+        setToken(res.data.token);
+      } catch (err) {
+        clearToken();
+        throw err;
+      }
+    },
+
+    // PhoneLogin
+    async phoneLogin(loginForm: PhoneLoginData) {
+      try {
+        const res = await phoneLogin(loginForm);
         setToken(res.data.token);
       } catch (err) {
         clearToken();

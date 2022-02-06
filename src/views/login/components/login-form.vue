@@ -1,65 +1,139 @@
 <template>
   <div class="login-form-wrapper">
-    <div class="login-form-title"> 登录 Arco Design Pro </div>
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
-    <a-form
-      ref="loginForm"
-      :model="userInfo"
-      class="login-form"
-      layout="vertical"
-      @submit="handleSubmit"
+    <div class="login-form-title">
+      <img :src="logoIcon" alt="logo" />
+      <span>Arco Design Pro</span>
+    </div>
+    <a-tabs
+      size="large"
+      animation
+      default-active-key="account"
+      @change="tabsChange"
     >
-      <a-form-item
-        field="username"
-        :rules="[{ required: true, message: '用户名不能为空' }]"
-        :validate-trigger="['change', 'blur']"
-        hide-label
-      >
-        <a-input
-          v-model="userInfo.username"
-          placeholder="用户名：admin"
-          @keyup.enter="handleSubmit"
+      <a-tab-pane key="account" title="账号密码登录">
+        <a-form
+          :model="userInfo"
+          size="large"
+          layout="vertical"
+          @submit="handleSubmit"
         >
-          <template #prefix>
-            <icon-user />
-          </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item
-        field="password"
-        :rules="[{ required: true, message: '密码不能为空' }]"
-        :validate-trigger="['change', 'blur']"
-        hide-label
-      >
-        <a-input-password
-          v-model="userInfo.password"
-          placeholder="密码：admin"
-          allow-clear
-          @keyup.enter="handleSubmit"
-        >
-          <template #prefix>
-            <icon-lock />
-          </template>
-        </a-input-password>
-      </a-form-item>
-      <a-space :size="16" direction="vertical">
-        <div class="login-form-password-actions">
-          <a-checkbox
-            :default-checked="rememberPassword"
-            @change="setRememberPassword"
+          <a-form-item
+            field="username"
+            :rules="[{ required: true, message: '用户名不能为空' }]"
+            :validate-trigger="['change', 'blur']"
+            hide-label
           >
-            记住密码
-          </a-checkbox>
-          <a-link> 忘记密码 </a-link>
-        </div>
-        <a-button type="primary" html-type="submit" long :loading="loading">
-          登录
-        </a-button>
-        <a-button type="text" long class="login-form-register-btn">
-          注册账号
-        </a-button>
-      </a-space>
-    </a-form>
+            <a-input
+              v-model="userInfo.username"
+              placeholder="用户名：admin"
+              @keyup.enter="handleSubmit"
+            >
+              <template #prefix>
+                <icon-user />
+              </template>
+            </a-input>
+          </a-form-item>
+          <a-form-item
+            field="password"
+            :rules="[{ required: true, message: '密码不能为空' }]"
+            :validate-trigger="['change', 'blur']"
+            hide-label
+          >
+            <a-input-password
+              v-model="userInfo.password"
+              placeholder="密码：admin"
+              allow-clear
+              @keyup.enter="handleSubmit"
+            >
+              <template #prefix>
+                <icon-lock />
+              </template>
+            </a-input-password>
+          </a-form-item>
+          <a-space :size="16" direction="vertical">
+            <div class="login-form-password-actions">
+              <a-checkbox
+                :default-checked="rememberPassword"
+                @change="setRememberPassword"
+              >
+                自动登录
+              </a-checkbox>
+              <a-link> 忘记密码 </a-link>
+            </div>
+            <a-button type="primary" html-type="submit" long :loading="loading">
+              登录
+            </a-button>
+            <a-button type="outline" long @click="callRegister">
+              注册账号
+            </a-button>
+          </a-space>
+        </a-form>
+      </a-tab-pane>
+      <a-tab-pane key="phone" title="手机号登录">
+        <a-form
+          ref="phoneLoginRef"
+          :model="phoneLogin"
+          size="large"
+          layout="vertical"
+          @submit="handleSubmit"
+        >
+          <a-form-item
+            field="phone"
+            :rules="phoneRules"
+            :validate-trigger="['change', 'blur']"
+            hide-label
+          >
+            <a-input
+              v-model="phoneLogin.phone"
+              placeholder="手机号"
+              style="margin-right: 8px"
+              @keyup.enter="handleSubmit"
+            >
+              <template #prefix>
+                <icon-phone />
+              </template>
+            </a-input>
+            <a-button type="outline" :disabled="waiting" @click="sendPhoneCode">
+              {{ waiting ? `${seconds}秒后发送` : '发送验证码' }}
+            </a-button>
+          </a-form-item>
+          <a-form-item
+            field="authCode"
+            :rules="[{ required: true, message: '验证码不能为空' }]"
+            :validate-trigger="['change', 'blur']"
+            hide-label
+          >
+            <a-input
+              v-model="phoneLogin.authCode"
+              placeholder="短信验证码"
+              allow-clear
+              @keyup.enter="handleSubmit"
+            >
+              <template #prefix>
+                <icon-safe />
+              </template>
+            </a-input>
+          </a-form-item>
+          <a-space :size="16" direction="vertical">
+            <div class="login-form-password-actions">
+              <a-checkbox
+                :default-checked="rememberPassword"
+                @change="setRememberPassword"
+              >
+                自动登录
+              </a-checkbox>
+              <a-link> 忘记密码 </a-link>
+            </div>
+            <a-button type="primary" html-type="submit" long :loading="loading">
+              登录
+            </a-button>
+            <a-button type="outline" long @click="callRegister">
+              注册账号
+            </a-button>
+          </a-space>
+        </a-form>
+      </a-tab-pane>
+    </a-tabs>
   </div>
 </template>
 
@@ -70,30 +144,62 @@ import { Message } from '@arco-design/web-vue';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
 import { useUserStore } from '@/store';
 import useLoading from '@/hooks/loading';
-import { LoginData } from '@/api/user';
+import { LoginData, PhoneLoginData } from '@/api/user';
+import logoIcon from '@/assets/icons/arco-logo.svg?url';
+import useCountDown from '@/hooks/countdown';
+import useFormValidator from '@/hooks/form-validator';
 
 export default defineComponent({
-  setup() {
+  emits: ['callRegister'],
+  setup(props, context) {
     const rememberPassword = ref(true);
     const router = useRouter();
-    const errorMessage = ref('');
+    const phoneLoginRef = ref(null);
     const { loading, setLoading } = useLoading();
     const userStore = useUserStore();
+    const loginMode = ref('account');
     const userInfo = reactive({
       username: 'admin',
       password: 'admin',
     });
+    const phoneLogin = reactive({
+      phone: '15288990112',
+      authCode: '123456',
+    });
+    const tabsChange = (value: string) => {
+      loginMode.value = value;
+    };
+    const callRegister = () => {
+      context.emit('callRegister');
+    };
+    const { phoneRules } = useFormValidator();
+    // 发送短信验证码
+    const { waiting, seconds, sendCode } = useCountDown();
+    const sendPhoneCode = () => {
+      const dom = phoneLoginRef.value as any;
+      dom.validateField('phone', (phoneError: ValidatedError) => {
+        if (!phoneError) {
+          // 发送短信验证码逻辑
+          sendCode();
+        }
+      });
+    };
+    // 账号登录
     const handleSubmit = async ({
       errors,
       values,
     }: {
       errors: Record<string, ValidatedError> | undefined;
-      values: LoginData;
+      values: LoginData | PhoneLoginData;
     }) => {
       if (!errors) {
         setLoading(true);
         try {
-          await userStore.login(values);
+          if (loginMode.value === 'account') {
+            await userStore.login(values as LoginData);
+          } else {
+            await userStore.phoneLogin(values as PhoneLoginData);
+          }
           const { redirect, ...othersQuery } = router.currentRoute.value.query;
           await router.push({
             name: (redirect as string) || 'workplace',
@@ -102,8 +208,6 @@ export default defineComponent({
             },
           });
           Message.success('欢迎使用');
-        } catch (err) {
-          errorMessage.value = (err as Error).message;
         } finally {
           setLoading(false);
         }
@@ -113,11 +217,20 @@ export default defineComponent({
       //
     };
     return {
+      logoIcon,
+      waiting,
+      seconds,
       loading,
+      loginMode,
       userInfo,
-      errorMessage,
-      handleSubmit,
+      phoneLogin,
+      phoneRules,
+      phoneLoginRef,
       rememberPassword,
+      sendPhoneCode,
+      tabsChange,
+      callRegister,
+      handleSubmit,
       setRememberPassword,
     };
   },
@@ -127,35 +240,46 @@ export default defineComponent({
 <style lang="less" scoped>
 .login-form {
   &-wrapper {
-    width: 320px;
+    width: 550px;
+    text-align: center;
   }
 
   &-title {
+    margin-bottom: 20px;
     color: var(--color-text-1);
-    font-weight: 500;
-    font-size: 24px;
+    font-weight: 600;
+    font-size: 33px;
     line-height: 32px;
-  }
 
-  &-sub-title {
-    color: var(--color-text-3);
-    font-size: 16px;
-    line-height: 24px;
-  }
+    img {
+      width: 48px;
+      height: 50px;
+      vertical-align: text-top;
+    }
 
-  &-error-msg {
-    height: 32px;
-    color: rgb(var(--red-6));
-    line-height: 32px;
+    span {
+      user-select: none;
+    }
   }
 
   &-password-actions {
     display: flex;
     justify-content: space-between;
   }
+}
 
-  &-register-btn {
-    color: var(--color-text-3) !important;
+:deep(.arco-tabs-nav) {
+  &::before {
+    background-color: unset;
   }
+
+  .arco-tabs-nav-tab {
+    justify-content: center;
+  }
+}
+
+:deep(.arco-form) {
+  width: 420px;
+  margin: 0 auto;
 }
 </style>

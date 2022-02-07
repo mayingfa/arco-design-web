@@ -58,7 +58,7 @@
               >
                 自动登录
               </a-checkbox>
-              <a-link> 忘记密码 </a-link>
+              <a-link @click="callForgotPassword"> 忘记密码 </a-link>
             </div>
             <a-button type="primary" html-type="submit" long :loading="loading">
               登录
@@ -122,7 +122,7 @@
               >
                 自动登录
               </a-checkbox>
-              <a-link> 忘记密码 </a-link>
+              <a-link @click="callForgotPassword"> 忘记密码 </a-link>
             </div>
             <a-button type="primary" html-type="submit" long :loading="loading">
               登录
@@ -150,41 +150,42 @@ import useCountDown from '@/hooks/countdown';
 import useFormValidator from '@/hooks/form-validator';
 
 export default defineComponent({
-  emits: ['callRegister'],
+  emits: ['callRegister', 'callForgotPassword'],
   setup(props, context) {
-    const rememberPassword = ref(true);
-    const router = useRouter();
-    const phoneLoginRef = ref(null);
-    const { loading, setLoading } = useLoading();
-    const userStore = useUserStore();
+    // 标签页
     const loginMode = ref('account');
+    const tabsChange = (value: string) => {
+      loginMode.value = value;
+    };
+
+    // 表单页面
+    const phoneLoginRef = ref(null);
+    const { phoneRules } = useFormValidator();
     const userInfo = reactive({
       username: 'admin',
       password: 'admin',
     });
     const phoneLogin = reactive({
-      phone: '15288990112',
+      phone: '15123456789',
       authCode: '123456',
     });
-    const tabsChange = (value: string) => {
-      loginMode.value = value;
-    };
-    const callRegister = () => {
-      context.emit('callRegister');
-    };
-    const { phoneRules } = useFormValidator();
+
     // 发送短信验证码
     const { waiting, seconds, sendCode } = useCountDown();
     const sendPhoneCode = () => {
-      const dom = phoneLoginRef.value as any;
-      dom.validateField('phone', (phoneError: ValidatedError) => {
+      const target = phoneLoginRef.value as any;
+      target.validateField('phone', (phoneError: ValidatedError) => {
         if (!phoneError) {
           // 发送短信验证码逻辑
           sendCode();
         }
       });
     };
+
     // 账号登录
+    const router = useRouter();
+    const userStore = useUserStore();
+    const { loading, setLoading } = useLoading();
     const handleSubmit = async ({
       errors,
       values,
@@ -213,9 +214,23 @@ export default defineComponent({
         }
       }
     };
+
+    // 记住密码
+    const rememberPassword = ref(true);
     const setRememberPassword = () => {
-      //
+      // 业务逻辑
     };
+
+    // 显示注册页面
+    const callRegister = () => {
+      context.emit('callRegister');
+    };
+
+    // 显示忘记密码页面
+    const callForgotPassword = () => {
+      context.emit('callForgotPassword');
+    };
+
     return {
       logoIcon,
       waiting,
@@ -230,6 +245,7 @@ export default defineComponent({
       sendPhoneCode,
       tabsChange,
       callRegister,
+      callForgotPassword,
       handleSubmit,
       setRememberPassword,
     };

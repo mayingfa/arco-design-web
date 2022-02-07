@@ -5,28 +5,12 @@
       <span>Arco Design Pro</span>
     </div>
     <a-form
-      ref="registerFormRef"
+      ref="forgotFormRef"
       :model="userInfo"
       size="large"
       layout="vertical"
       @submit="handleSubmit"
     >
-      <a-form-item
-        field="username"
-        :rules="[{ required: true, message: '请输入用户名' }]"
-        :validate-trigger="['change', 'blur']"
-        hide-label
-      >
-        <a-input
-          v-model="userInfo.username"
-          placeholder="请输入用户名"
-          @keyup.enter="handleSubmit"
-        >
-          <template #prefix>
-            <icon-user />
-          </template>
-        </a-input>
-      </a-form-item>
       <a-form-item
         field="phone"
         :rules="phoneRules"
@@ -64,14 +48,14 @@
         </a-input>
       </a-form-item>
       <a-form-item
-        field="password"
+        field="newPassword"
         :rules="passwordRules"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input-password
-          v-model="userInfo.password"
-          placeholder="请输入密码"
+          v-model="userInfo.newPassword"
+          placeholder="请输入新的密码"
           allow-clear
           @keyup.enter="handleSubmit"
         >
@@ -80,26 +64,9 @@
           </template>
         </a-input-password>
       </a-form-item>
-      <a-form-item
-        field="agreeProtocol"
-        :rules="[
-          {
-            type: 'boolean',
-            true: true,
-            message: '请阅读并同意我们的服务条款',
-          },
-        ]"
-        :validate-trigger="['change', 'blur']"
-        hide-label
-        class="register-form-protocol"
-      >
-        <a-checkbox v-model="userInfo.agreeProtocol">
-          我已阅读并同意<a-link>Arco Design服务协议</a-link>
-        </a-checkbox>
-      </a-form-item>
       <a-space :size="16" direction="vertical">
         <a-button type="primary" html-type="submit" long :loading="loading">
-          注册
+          重置密码
         </a-button>
         <a-button type="outline" long @click="callLogin"> 返回 </a-button>
       </a-space>
@@ -114,7 +81,7 @@ import useLoading from '@/hooks/loading';
 import useCountDown from '@/hooks/countdown';
 import { Message } from '@arco-design/web-vue';
 import useFormValidator from '@/hooks/form-validator';
-import { RegisterData } from '@/api/user';
+import { ResetPasswordData } from '@/api/user';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
 
@@ -122,20 +89,18 @@ export default defineComponent({
   emits: ['callLogin'],
   setup(props, context) {
     // 表单信息
-    const registerFormRef = ref(null);
+    const forgotFormRef = ref(null);
     const { phoneRules, passwordRules } = useFormValidator();
     const userInfo = reactive({
-      username: '',
-      password: '',
       phone: '',
       authCode: '',
-      agreeProtocol: false,
+      newPassword: '',
     });
 
     // 发送短信验证码
     const { waiting, seconds, sendCode } = useCountDown();
     const sendPhoneCode = () => {
-      const target = registerFormRef.value as any;
+      const target = forgotFormRef.value as any;
       target.validateField('phone', (phoneError: ValidatedError) => {
         if (!phoneError) {
           // 发送短信验证码逻辑
@@ -149,7 +114,7 @@ export default defineComponent({
       context.emit('callLogin');
     };
 
-    // 注册账号
+    // 重置密码
     const userStore = useUserStore();
     const { loading, setLoading } = useLoading();
     const handleSubmit = async ({
@@ -157,14 +122,14 @@ export default defineComponent({
       values,
     }: {
       errors: Record<string, ValidatedError> | undefined;
-      values: RegisterData;
+      values: ResetPasswordData;
     }) => {
       if (!errors) {
         setLoading(true);
         try {
-          await userStore.register(values);
+          await userStore.resetPassword(values);
           callLogin();
-          Message.success('注册成功');
+          Message.success('密码重置成功');
         } finally {
           setLoading(false);
         }
@@ -179,7 +144,7 @@ export default defineComponent({
       waiting,
       phoneRules,
       passwordRules,
-      registerFormRef,
+      forgotFormRef,
       callLogin,
       handleSubmit,
       sendPhoneCode,
@@ -223,10 +188,5 @@ export default defineComponent({
 :deep(.arco-form) {
   width: 420px;
   margin: 0 auto;
-}
-
-:deep(.arco-form-size-large .arco-form-item-content),
-:deep(.arco-form-size-large .arco-form-item-wrapper-col) {
-  min-height: 30px;
 }
 </style>

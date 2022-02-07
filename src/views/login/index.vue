@@ -7,8 +7,19 @@
     <LoginBanner />
     <div class="content">
       <div class="content-inner">
-        <LoginForm v-if="showLoginForm" @callRegister="callRegister" />
-        <RegisterForm v-else @callLogin="callLogin" />
+        <LoginForm
+          v-if="showPage === PageEnum.Login"
+          @callRegister="callRegister"
+          @callForgotPassword="callForgotPassword"
+        />
+        <RegisterForm
+          v-else-if="showPage === PageEnum.Register"
+          @callLogin="callLogin"
+        />
+        <ForgotPasswordForm
+          v-else-if="showPage === PageEnum.ForgotPassword"
+          @callLogin="callLogin"
+        />
       </div>
       <div class="footer">
         <Footer />
@@ -24,28 +35,40 @@ import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import LoginBanner from './components/banner.vue';
 import LoginForm from './components/login-form.vue';
 import RegisterForm from './components/register-form.vue';
+import ForgotPasswordForm from './components/forgot-password-form.vue';
 
+enum PageEnum {
+  Login,
+  Register,
+  ForgotPassword,
+}
 export default defineComponent({
   components: {
     LoginBanner,
     LoginForm,
     RegisterForm,
+    ForgotPasswordForm,
     Footer,
   },
   setup() {
-    const showLoginForm = ref(true);
+    const showPage = ref(0);
     const callLogin = () => {
-      showLoginForm.value = true;
+      showPage.value = PageEnum.Login;
     };
     const callRegister = () => {
-      showLoginForm.value = false;
+      showPage.value = PageEnum.Register;
+    };
+    const callForgotPassword = () => {
+      showPage.value = PageEnum.ForgotPassword;
     };
 
     return {
-      showLoginForm,
+      showPage,
       logoIcon,
+      PageEnum,
       callLogin,
       callRegister,
+      callForgotPassword,
     };
   },
 });

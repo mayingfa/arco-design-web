@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia';
 import {
-  login as userLogin,
-  logout as userLogout,
   getUserInfo,
   LoginData,
-  phoneLogin,
+  login as userLogin,
+  logout as userLogout,
   PhoneLoginData,
+  phoneLogin,
+  RegisterData,
+  register as userRegister,
+  resetPassword,
+  ResetPasswordData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { RoleEnum } from '@/enums/roleEnum';
@@ -46,17 +50,18 @@ export const useUserStore = defineStore('user', {
         resolve(this.role);
       });
     },
-    // Set user's information
+
+    // 设置用户信息
     setInfo(partial: Partial<UserState>) {
       this.$patch(partial);
     },
 
-    // Reset user's information
+    // 重置用户的信息
     resetInfo() {
       this.$reset();
     },
 
-    // Get user's information
+    // 获取用户的信息
     async info() {
       const res = await getUserInfo();
       if (!res.data.avatar) {
@@ -65,7 +70,7 @@ export const useUserStore = defineStore('user', {
       this.setInfo(res.data);
     },
 
-    // Login
+    // 账号密码登录
     async login(loginForm: LoginData) {
       try {
         const res = await userLogin(loginForm);
@@ -76,7 +81,7 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    // PhoneLogin
+    // 手机号登录
     async phoneLogin(loginForm: PhoneLoginData) {
       try {
         const res = await phoneLogin(loginForm);
@@ -87,7 +92,17 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    // Logout
+    // 注册账号
+    async register(registerForm: RegisterData) {
+      await userRegister(registerForm);
+    },
+
+    // 重置密码
+    async resetPassword(ResetPasswordForm: ResetPasswordData) {
+      await resetPassword(ResetPasswordForm);
+    },
+
+    // 退出系统
     async logout() {
       await userLogout();
       this.resetInfo();

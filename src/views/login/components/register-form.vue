@@ -2,7 +2,7 @@
   <div class="register-form-wrapper">
     <div class="register-form-title">
       <img :src="logoIcon" alt="logo" />
-      <span>Arco Design Pro</span>
+      <span>Arco Design Starter</span>
     </div>
     <a-form
       ref="registerFormRef"
@@ -202,12 +202,12 @@ export default defineComponent({
     margin-bottom: 35px;
     color: var(--color-text-1);
     font-weight: 600;
-    font-size: 33px;
+    font-size: 32px;
     line-height: 32px;
 
     img {
-      width: 48px;
-      height: 50px;
+      width: 60px;
+      height: 45px;
       vertical-align: text-top;
     }
 

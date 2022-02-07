@@ -2,7 +2,7 @@
   <div class="container">
     <div class="logo">
       <img :src="logoIcon" alt="logo" />
-      <div class="logo-text">Arco Design Pro</div>
+      <div class="logo-text">Arco Design Starter</div>
     </div>
     <LoginBanner />
     <div class="content">

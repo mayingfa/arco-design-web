@@ -23,8 +23,8 @@ export default function useCountDown() {
       immediateCallback: false,
     }
   );
-  // 发送验证码
-  const sendCode = (timer = 60) => {
+  // 开始倒计时
+  const countDown = (timer = 60) => {
     if (seconds.value === 0) {
       waiting.value = true;
       seconds.value = timer;
@@ -34,6 +34,6 @@ export default function useCountDown() {
   return {
     waiting,
     seconds,
-    sendCode,
+    countDown,
   };
 }

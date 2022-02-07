@@ -41,6 +41,7 @@
           >
             <a-input-password
               v-model="userInfo.password"
+              autocomplete="new-password"
               placeholder="密码：admin"
               allow-clear
               @keyup.enter="handleSubmit"
@@ -52,12 +53,7 @@
           </a-form-item>
           <a-space :size="16" direction="vertical">
             <div class="login-form-password-actions">
-              <a-checkbox
-                :default-checked="rememberPassword"
-                @change="setRememberPassword"
-              >
-                自动登录
-              </a-checkbox>
+              <a-checkbox v-model="rememberPassword"> 自动登录 </a-checkbox>
               <a-link @click="callForgotPassword"> 忘记密码 </a-link>
             </div>
             <a-button type="primary" html-type="submit" long :loading="loading">
@@ -116,12 +112,7 @@
           </a-form-item>
           <a-space :size="16" direction="vertical">
             <div class="login-form-password-actions">
-              <a-checkbox
-                :default-checked="rememberPassword"
-                @change="setRememberPassword"
-              >
-                自动登录
-              </a-checkbox>
+              <a-checkbox v-model="rememberPassword"> 自动登录 </a-checkbox>
               <a-link @click="callForgotPassword"> 忘记密码 </a-link>
             </div>
             <a-button type="primary" html-type="submit" long :loading="loading">
@@ -138,7 +129,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { Message } from '@arco-design/web-vue';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
@@ -148,7 +139,10 @@ import { LoginData, PhoneLoginData } from '@/api/user';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import useCountDown from '@/hooks/countdown';
 import useFormValidator from '@/hooks/form-validator';
+import { sendPhoneAuthCode } from '@/api/send-message';
 
+const USER_NAME = 'username';
+const PASS_WORD = 'remember';
 export default defineComponent({
   emits: ['callRegister', 'callForgotPassword'],
   setup(props, context) {
@@ -161,6 +155,7 @@ export default defineComponent({
     // 表单页面
     const phoneLoginRef = ref(null);
     const { phoneRules } = useFormValidator();
+    const rememberPassword = ref(true);
     const userInfo = reactive({
       username: 'admin',
       password: 'admin',
@@ -171,15 +166,27 @@ export default defineComponent({
     });
 
     // 发送短信验证码
-    const { waiting, seconds, sendCode } = useCountDown();
+    const { waiting, seconds, countDown } = useCountDown();
     const sendPhoneCode = () => {
       const target = phoneLoginRef.value as any;
-      target.validateField('phone', (phoneError: ValidatedError) => {
+      target.validateField('phone', async (phoneError: ValidatedError) => {
         if (!phoneError) {
-          // 发送短信验证码逻辑
-          sendCode();
+          countDown();
+          await sendPhoneAuthCode({ phone: phoneLogin.phone });
+          Message.success('发送成功');
         }
       });
+    };
+
+    // 记住密码
+    const savePassword = () => {
+      if (rememberPassword.value) {
+        localStorage.setItem(USER_NAME, userInfo.username);
+        localStorage.setItem(PASS_WORD, window.btoa(userInfo.password));
+      } else {
+        localStorage.removeItem(USER_NAME);
+        localStorage.removeItem(PASS_WORD);
+      }
     };
 
     // 账号登录
@@ -201,6 +208,7 @@ export default defineComponent({
           } else {
             await userStore.phoneLogin(values as PhoneLoginData);
           }
+          savePassword();
           const { redirect, ...othersQuery } = router.currentRoute.value.query;
           await router.push({
             name: (redirect as string) || 'workplace',
@@ -215,12 +223,6 @@ export default defineComponent({
       }
     };
 
-    // 记住密码
-    const rememberPassword = ref(true);
-    const setRememberPassword = () => {
-      // 业务逻辑
-    };
-
     // 显示注册页面
     const callRegister = () => {
       context.emit('callRegister');
@@ -230,6 +232,16 @@ export default defineComponent({
     const callForgotPassword = () => {
       context.emit('callForgotPassword');
     };
+
+    onMounted(() => {
+      const username = localStorage.getItem(USER_NAME);
+      const password = localStorage.getItem(PASS_WORD);
+      if (username && password) {
+        userInfo.username = username;
+        userInfo.password = window.atob(password);
+        rememberPassword.value = true;
+      }
+    });
 
     return {
       logoIcon,
@@ -247,7 +259,6 @@ export default defineComponent({
       callRegister,
       callForgotPassword,
       handleSubmit,
-      setRememberPassword,
     };
   },
 });

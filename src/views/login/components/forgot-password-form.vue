@@ -55,6 +55,7 @@
       >
         <a-input-password
           v-model="userInfo.newPassword"
+          autocomplete="new-password"
           placeholder="请输入新的密码"
           allow-clear
           @keyup.enter="handleSubmit"
@@ -84,6 +85,7 @@ import useFormValidator from '@/hooks/form-validator';
 import { ResetPasswordData } from '@/api/user';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
+import { sendPhoneAuthCode } from '@/api/send-message';
 
 export default defineComponent({
   emits: ['callLogin'],
@@ -98,13 +100,14 @@ export default defineComponent({
     });
 
     // 发送短信验证码
-    const { waiting, seconds, sendCode } = useCountDown();
+    const { waiting, seconds, countDown } = useCountDown();
     const sendPhoneCode = () => {
       const target = forgotFormRef.value as any;
-      target.validateField('phone', (phoneError: ValidatedError) => {
+      target.validateField('phone', async (phoneError: ValidatedError) => {
         if (!phoneError) {
-          // 发送短信验证码逻辑
-          sendCode();
+          countDown();
+          await sendPhoneAuthCode({ phone: userInfo.phone });
+          Message.success('发送成功');
         }
       });
     };

@@ -43,6 +43,8 @@ export default defineConfig({
     extensions: ['.ts', '.js'],
   },
   define: {
-    'process.env': {},
+    'process.env': {
+      BASE_API: 'http://localhost:9999',
+    },
   },
 });

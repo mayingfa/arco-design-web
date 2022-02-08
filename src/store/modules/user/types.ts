@@ -1,6 +1,10 @@
 import { RoleEnum } from '@/enums/roleEnum';
 
-export type RoleType = '' | RoleEnum.All | RoleEnum.ADMIN | RoleEnum.USER;
+export type RoleType =
+  | undefined
+  | RoleEnum.All
+  | RoleEnum.ADMIN
+  | RoleEnum.USER;
 
 export interface UserState {
   name?: string;

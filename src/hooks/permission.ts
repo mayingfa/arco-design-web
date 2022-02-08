@@ -10,7 +10,7 @@ export default function usePermission() {
         !route.meta?.requiresAuth ||
         !route.meta?.role ||
         route.meta?.role?.includes(RoleEnum.All) ||
-        route.meta?.role?.includes(userStore.role)
+        route.meta?.role?.includes(userStore.role || '')
       );
     },
     findFirstPermissionRoute(_routers: any, role = RoleEnum.ADMIN) {

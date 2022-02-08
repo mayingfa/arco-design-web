@@ -9,16 +9,21 @@ export interface HttpResponse<T = unknown> {
   data: T;
 }
 
+// 配置请求路径和超时时间
+axios.defaults.baseURL = process.env.BASE_API;
+axios.defaults.timeout = 5000;
+
+// 请求拦截器
 axios.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     return config;
   },
   (error) => {
-    // do something
     return Promise.reject(error);
   }
 );
-// add response interceptors
+
+// 响应拦截器
 axios.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
     const res = response.data;

@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
     registrationDate: undefined,
     accountId: undefined,
     certification: undefined,
-    role: '',
+    role: undefined,
   }),
 
   getters: {

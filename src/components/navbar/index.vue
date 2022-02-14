@@ -7,7 +7,7 @@
           :style="{ margin: 0, fontSize: '18px' }"
           :heading="5"
         >
-          Arco Design Starter
+          Arco Design Web
         </a-typography-title>
       </a-space>
     </div>

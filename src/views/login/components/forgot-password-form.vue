@@ -2,7 +2,7 @@
   <div class="register-form-wrapper">
     <div class="register-form-title">
       <img :src="logoIcon" alt="logo" />
-      <span>Arco Design Starter</span>
+      <span>Arco Design Web</span>
     </div>
     <a-form
       ref="forgotFormRef"

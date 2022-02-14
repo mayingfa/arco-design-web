@@ -1,5 +1,5 @@
 <h1 style="text-align:center">
-    Arco Design Starter
+    Arco Design Web
 </h1>
 
 <p style="text-align:center">  
@@ -61,10 +61,10 @@
 
 ```sh
 # 克隆项目
-git clone https://gitee.com/ma_ying_fa/arco-design-starter.git
+git clone https://gitee.com/ma_ying_fa/arco-design-web.git
 
 # 进入项目目录
-cd arco-design-starter
+cd arco-design-web
 
 # 安装依赖
 yarn install

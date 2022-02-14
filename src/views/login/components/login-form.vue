@@ -2,7 +2,7 @@
   <div class="login-form-wrapper">
     <div class="login-form-title">
       <img :src="logoIcon" alt="logo" />
-      <span>Arco Design Starter</span>
+      <span>Arco Design Web</span>
     </div>
     <a-tabs
       size="large"

@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer class="footer">
-    Copyright © {{ new Date().getFullYear() }} Present Arco Design Starter
+    Copyright © {{ new Date().getFullYear() }} Present Arco Design Web
   </a-layout-footer>
 </template>
 

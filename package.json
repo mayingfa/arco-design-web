@@ -1,9 +1,9 @@
 {
-  "name": "arco-design-pro-vue",
-  "description": "Arco Design Starter for Vue",
+  "name": "arco-design-web",
+  "description": "The front template for Vue3, Simplified in Arco Design Pro",
   "version": "1.0.0",
   "private": true,
-  "author": "ArcoDesign Team",
+  "author": "ma_ying_fa",
   "license": "MIT",
   "scripts": {
     "dev": "vite --config ./config/vite.config.dev.ts",

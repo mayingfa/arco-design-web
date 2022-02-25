@@ -40,6 +40,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
   const userStore = useUserStore();
+
   function crossroads() {
     const Permission = usePermission();
     if (Permission.accessRouter(to)) next();
@@ -54,6 +55,7 @@ router.beforeEach(async (to, from, next) => {
     }
     NProgress.done();
   }
+
   if (isLogin()) {
     if (userStore.role) {
       crossroads();

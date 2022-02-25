@@ -61,7 +61,7 @@
 
 ```sh
 # 克隆项目
-git clone https://gitee.com/ma_ying_fa/arco-design-web.git
+git clone https://gitee.com/mayingfa/arco-design-web.git
 
 # 进入项目目录
 cd arco-design-web

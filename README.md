@@ -20,7 +20,7 @@
 ## ✨ 特点
 
 - TypeScript - 代码完全使用 TypeScript 书写
-- 移除I18n - 内置国际化多语言解决方案
+- 移除 I18n - 内置国际化多语言解决方案
 - 增加注册、登录、忘记密码页面，调整部分页面样式
 - Mock - 内置 api 模拟方案，代码即注释，更加仿真线上环境。
 
@@ -76,10 +76,10 @@ npm run dev
 ## 🧩 Vue 生态圈
 
 - Vite2 下一代前端开发与构建工具 <https://cn.vitejs.dev>
-- Vue3 渐进式JavaScript 框架 <https://v3.cn.vuejs.org>
+- Vue3 渐进式 JavaScript 框架 <https://v3.cn.vuejs.org>
 - TypeScript 中文手册 <https://typescript.bootcss.com>
-- Pinia 下一代Vuex5 <https://pinia.vuejs.org>
-- Vue Router官网 <https://router.vuejs.org>
+- Pinia 下一代 Vuex5 <https://pinia.vuejs.org>
+- Vue Router 官网 <https://router.vuejs.org>
 - VueRequest 请求库 <https://www.attojs.com>
 - Mock 拦截请求模拟数据 <http://mockjs.com>
 - Arco Design 组件库 <https://arco.design/vue/docs/start>

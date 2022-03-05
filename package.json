@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "vite --config ./config/vite.config.dev.ts",
     "build": "vue-tsc --noEmit && vite build --config ./config/vite.config.prod.ts",
-    "lint-staged": "npx lint-staged"
+    "lint-staged": "npx lint-staged",
+    "prettier": "prettier --write ."
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [

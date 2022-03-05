@@ -78,8 +78,7 @@ export default defineComponent({
             show: true,
             interval: (idx: number) => {
               if (idx === 0) return false;
-              if (idx === xAxis.value.length - 1) return false;
-              return true;
+              return idx !== xAxis.value.length - 1;
             },
             lineStyle: {
               color: '#E5E8EF',
@@ -204,5 +203,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped lang="less"></style>

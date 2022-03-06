@@ -15,23 +15,17 @@
       </a-avatar>
       <div class="user-info">
         <a-typography-title :heading="6" style="margin: 0">
-          {{ userInfo.name }}
+          {{ userInfo.nickName }}
         </a-typography-title>
         <div class="user-msg">
-          <a-space :size="18">
+          <a-space :size="19">
             <div>
-              <icon-user />
-              <a-typography-text>{{ userInfo.jobName }}</a-typography-text>
+              <icon-email />
+              <a-typography-text>{{ userInfo.email }}</a-typography-text>
             </div>
             <div>
-              <icon-home />
-              <a-typography-text>
-                {{ userInfo.organizationName }}
-              </a-typography-text>
-            </div>
-            <div>
-              <icon-location />
-              <a-typography-text>{{ userInfo.locationName }}</a-typography-text>
+              <icon-phone />
+              <a-typography-text>{{ userInfo.phone }}</a-typography-text>
             </div>
           </a-space>
         </div>
@@ -44,6 +38,7 @@
 import { defineComponent } from 'vue';
 import { useUserStore } from '@/store';
 import { UserState } from '@/store/modules/user/types';
+import { GenderEnum } from '@/enums/GenderEnum';
 import userInfoBackgroundImage from '@/assets/images/user-info-background.jpg';
 
 export default defineComponent({
@@ -52,6 +47,7 @@ export default defineComponent({
     return {
       userInfo: userStore,
       userInfoBackgroundImage,
+      GenderEnum,
     };
   },
 });

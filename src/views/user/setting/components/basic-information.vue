@@ -41,7 +41,7 @@
       ]"
     >
       <a-select v-model="formData.countryRegion" placeholder="请选择">
-        <a-option value="China">中国</a-option>
+        <a-option value="中国">中国</a-option>
       </a-select>
     </a-form-item>
     <a-form-item
@@ -94,17 +94,19 @@ import { defineComponent, ref } from 'vue';
 import { FormInstance } from '@arco-design/web-vue/es/form';
 import { BasicInfoModel } from '@/api/user-center';
 import CityAreas from '@/assets/json/city-areas.json';
+import { useUserStore } from '@/store';
 
 export default defineComponent({
   setup() {
     const formRef = ref<FormInstance>();
+    const userStore = useUserStore();
     const formData = ref<BasicInfoModel>({
-      email: '',
-      nickname: '',
-      countryRegion: '',
-      area: '',
-      address: '',
-      profile: '',
+      email: userStore.email || '',
+      nickname: userStore.nickName || '',
+      countryRegion: '中国',
+      area: '110102',
+      address: '看丹街道',
+      profile: userStore.note || '',
     });
     const validate = async () => {
       const res = await formRef.value?.validate();

@@ -12,22 +12,22 @@
       @submit="handleSubmit"
     >
       <a-form-item
-        field="phone"
-        :rules="phoneRules"
+        field="email"
+        :rules="emailRules"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input
-          v-model="userInfo.phone"
-          placeholder="请输入手机号码"
+          v-model="userInfo.email"
+          placeholder="请输入邮箱地址"
           style="margin-right: 8px"
           @keyup.enter="handleSubmit"
         >
           <template #prefix>
-            <icon-phone />
+            <icon-email />
           </template>
         </a-input>
-        <a-button type="outline" :disabled="waiting" @click="sendPhoneCode">
+        <a-button type="outline" :disabled="waiting" @click="sendEmailCode">
           {{ waiting ? `${seconds}秒后发送` : '发送验证码' }}
         </a-button>
       </a-form-item>
@@ -85,28 +85,28 @@ import useFormValidator from '@/hooks/form-validator';
 import { ResetPasswordData } from '@/api/user';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-import { sendPhoneAuthCode } from '@/api/send-message';
+import { sendEmailAuthCode } from '@/api/send-message';
 
 export default defineComponent({
   emits: ['callLogin'],
   setup(props, context) {
     // 表单信息
     const forgotFormRef = ref(null);
-    const { phoneRules, passwordRules } = useFormValidator();
+    const { emailRules, passwordRules } = useFormValidator();
     const userInfo = reactive({
-      phone: '',
+      email: '',
       authCode: '',
       newPassword: '',
     });
 
     // 发送短信验证码
     const { waiting, seconds, countDown } = useCountDown();
-    const sendPhoneCode = () => {
+    const sendEmailCode = () => {
       const target = forgotFormRef.value as any;
-      target.validateField('phone', async (phoneError: ValidatedError) => {
-        if (!phoneError) {
+      target.validateField('phone', async (emailError: ValidatedError) => {
+        if (!emailError) {
           countDown();
-          await sendPhoneAuthCode({ phone: userInfo.phone });
+          await sendEmailAuthCode({ email: userInfo.email });
           Message.success('发送成功');
         }
       });
@@ -145,12 +145,12 @@ export default defineComponent({
       userInfo,
       seconds,
       waiting,
-      phoneRules,
+      emailRules,
       passwordRules,
       forgotFormRef,
       callLogin,
       handleSubmit,
-      sendPhoneCode,
+      sendEmailCode,
     };
   },
 });

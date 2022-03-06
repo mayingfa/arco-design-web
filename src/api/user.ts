@@ -2,7 +2,7 @@ import axios from 'axios';
 import { UserState } from '@/store/modules/user/types';
 
 export interface LoginData {
-  username: string;
+  userName: string;
   password: string;
 }
 
@@ -12,43 +12,45 @@ export interface PhoneLoginData {
 }
 
 export interface LoginRes {
-  token: string;
+  tokenValue: string;
 }
 
 export function login(data: LoginData) {
-  return axios.post<LoginRes>('/api/user/login', data);
+  return axios.post<LoginRes>('/api/admin/login/username', data);
 }
 
 export function phoneLogin(data: PhoneLoginData) {
-  return axios.post<LoginRes>('/api/user/phone-login', data);
+  return axios.post<LoginRes>('/api/admin/login/phone', data);
 }
 
 export function logout() {
-  return axios.post<LoginRes>('/api/user/logout');
+  return axios.post<LoginRes>('/api/admin/logout');
 }
 
 export function getUserInfo() {
-  return axios.post<UserState>('/api/user/info');
+  return axios.get<UserState>('/api/admin/info');
 }
 
 export interface RegisterData {
-  username: string;
+  nickName: string;
   password: string;
-  phone: string;
+  email: string;
   authCode: string;
   agreeProtocol: boolean;
 }
 
 export function register(data: RegisterData) {
-  return axios.post<string>('/api/user/register', data);
+  return axios.post<string>('/api/admin/register', data);
 }
 
 export interface ResetPasswordData {
-  phone: string;
+  email: string;
   authCode: string;
   newPassword: string;
 }
 
 export function resetPassword(data: ResetPasswordData) {
-  return axios.post<string>('/api/user/reset-password', data);
+  return axios.post<string>('/api/admin/password/reset', data);
 }
+
+export const uploadUserAvatarUrl = `${process.env.BASE_API}/api/admin/upload/avatar`;

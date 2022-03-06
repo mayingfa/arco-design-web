@@ -12,13 +12,13 @@
       @submit="handleSubmit"
     >
       <a-form-item
-        field="username"
+        field="nickName"
         :rules="[{ required: true, message: '请输入用户名' }]"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input
-          v-model="userInfo.username"
+          v-model="userInfo.nickName"
           placeholder="请输入用户名"
           @keyup.enter="handleSubmit"
         >
@@ -28,19 +28,19 @@
         </a-input>
       </a-form-item>
       <a-form-item
-        field="phone"
-        :rules="phoneRules"
+        field="email"
+        :rules="emailRules"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input
-          v-model="userInfo.phone"
-          placeholder="请输入手机号码"
+          v-model="userInfo.email"
+          placeholder="请输入邮箱地址"
           style="margin-right: 8px"
           @keyup.enter="handleSubmit"
         >
           <template #prefix>
-            <icon-phone />
+            <icon-email />
           </template>
         </a-input>
         <a-button type="outline" :disabled="waiting" @click="sendPhoneCode">
@@ -95,14 +95,15 @@
         class="register-form-protocol"
       >
         <a-checkbox v-model="userInfo.agreeProtocol">
-          我已阅读并同意<a-link>Arco Design服务协议</a-link>
+          我已阅读并同意
+          <a-link>Arco Design服务协议</a-link>
         </a-checkbox>
       </a-form-item>
       <a-space :size="16" direction="vertical">
         <a-button type="primary" html-type="submit" long :loading="loading">
           注册
         </a-button>
-        <a-button type="outline" long @click="callLogin"> 返回 </a-button>
+        <a-button type="outline" long @click="callLogin"> 返回</a-button>
       </a-space>
     </a-form>
   </div>
@@ -118,18 +119,18 @@ import useFormValidator from '@/hooks/form-validator';
 import { RegisterData } from '@/api/user';
 import logoIcon from '@/assets/icons/arco-logo.svg?url';
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-import { sendPhoneAuthCode } from '@/api/send-message';
+import { sendEmailAuthCode } from '@/api/send-message';
 
 export default defineComponent({
   emits: ['callLogin'],
   setup(props, context) {
     // 表单信息
     const registerFormRef = ref(null);
-    const { phoneRules, passwordRules } = useFormValidator();
+    const { emailRules, passwordRules } = useFormValidator();
     const userInfo = reactive({
-      username: '',
+      nickName: '',
       password: '',
-      phone: '',
+      email: '',
       authCode: '',
       agreeProtocol: false,
     });
@@ -138,10 +139,10 @@ export default defineComponent({
     const { waiting, seconds, countDown } = useCountDown();
     const sendPhoneCode = () => {
       const target = registerFormRef.value as any;
-      target.validateField('phone', async (phoneError: ValidatedError) => {
+      target.validateField('email', async (phoneError: ValidatedError) => {
         if (!phoneError) {
           countDown();
-          await sendPhoneAuthCode({ phone: userInfo.phone });
+          await sendEmailAuthCode({ email: userInfo.email });
           Message.success('发送成功');
         }
       });
@@ -180,7 +181,7 @@ export default defineComponent({
       userInfo,
       seconds,
       waiting,
-      phoneRules,
+      emailRules,
       passwordRules,
       registerFormRef,
       callLogin,
@@ -209,6 +210,7 @@ export default defineComponent({
       width: 60px;
       height: 45px;
       vertical-align: text-top;
+      user-select: none;
     }
 
     span {

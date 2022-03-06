@@ -8,16 +8,20 @@ export const successResponseWrap = (data: unknown) => {
   return {
     data,
     status: 'ok',
-    msg: '请求成功',
-    code: 20000,
+    message: '请求成功',
+    code: 200,
   };
 };
 
-export const failResponseWrap = (data: unknown, code = 50000, msg: string) => {
+export const failResponseWrap = (
+  data: unknown,
+  code = 500,
+  message: string
+) => {
   return {
     data,
     status: 'fail',
-    msg,
+    message,
     code,
   };
 };

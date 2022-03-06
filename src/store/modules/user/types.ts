@@ -1,4 +1,4 @@
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 
 export type RoleType =
   | undefined
@@ -7,20 +7,18 @@ export type RoleType =
   | RoleEnum.USER;
 
 export interface UserState {
-  name?: string;
-  avatar?: string;
-  job?: string;
-  organization?: string;
-  location?: string;
-  email?: string;
-  introduction?: string;
-  personalWebsite?: string;
-  jobName?: string;
-  organizationName?: string;
-  locationName?: string;
+  userName: string;
+  password: string;
+  nickName: string;
+  age?: number;
+  gender?: string;
+  email: string;
   phone?: string;
-  registrationDate?: string;
-  accountId?: string;
-  certification?: number;
+  identityCard?: string;
+  avatar?: string;
+  note?: string;
+  createTime?: string;
+  updateTime?: string;
+  loginTime?: string;
   role: RoleType;
 }

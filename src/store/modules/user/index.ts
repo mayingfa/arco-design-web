@@ -12,27 +12,25 @@ import {
   ResetPasswordData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 import boyAvatar from '@/assets/svg/avatar-boy.svg?url';
 import { UserState } from './types';
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    name: undefined,
-    avatar: undefined,
-    job: undefined,
-    organization: undefined,
-    location: undefined,
-    email: undefined,
-    introduction: undefined,
-    personalWebsite: undefined,
-    jobName: undefined,
-    organizationName: undefined,
-    locationName: undefined,
+    userName: '',
+    password: '',
+    nickName: '',
+    age: 0,
+    gender: undefined,
+    email: '',
     phone: undefined,
-    registrationDate: undefined,
-    accountId: undefined,
-    certification: undefined,
+    identityCard: undefined,
+    avatar: undefined,
+    note: undefined,
+    createTime: undefined,
+    updateTime: undefined,
+    loginTime: undefined,
     role: undefined,
   }),
 
@@ -56,6 +54,11 @@ export const useUserStore = defineStore('user', {
       this.$patch(partial);
     },
 
+    // 设置用户头像
+    setAvatar(avatar: string) {
+      this.avatar = avatar;
+    },
+
     // 重置用户的信息
     resetInfo() {
       this.$reset();
@@ -67,6 +70,7 @@ export const useUserStore = defineStore('user', {
       if (!res.data.avatar) {
         res.data.avatar = boyAvatar;
       }
+      res.data.role = RoleEnum.All;
       this.setInfo(res.data);
     },
 
@@ -74,7 +78,7 @@ export const useUserStore = defineStore('user', {
     async login(loginForm: LoginData) {
       try {
         const res = await userLogin(loginForm);
-        setToken(res.data.token);
+        setToken(res.data.tokenValue);
       } catch (err) {
         clearToken();
         throw err;
@@ -85,7 +89,7 @@ export const useUserStore = defineStore('user', {
     async phoneLogin(loginForm: PhoneLoginData) {
       try {
         const res = await phoneLogin(loginForm);
-        setToken(res.data.token);
+        setToken(res.data.tokenValue);
       } catch (err) {
         clearToken();
         throw err;
@@ -105,6 +109,11 @@ export const useUserStore = defineStore('user', {
     // 退出系统
     async logout() {
       await userLogout();
+      this.clearCache();
+    },
+
+    //  清理缓存
+    async clearCache() {
       this.resetInfo();
       clearToken();
     },

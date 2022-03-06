@@ -44,7 +44,7 @@ export default defineConfig({
   },
   define: {
     'process.env': {
-      BASE_API: 'http://localhost:9999',
+      BASE_API: 'http://localhost:8080',
     },
   },
 });

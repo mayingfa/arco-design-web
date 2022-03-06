@@ -1,4 +1,4 @@
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 
 export default {
   path: 'result',

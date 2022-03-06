@@ -2,9 +2,11 @@
   <a-card :bordered="false">
     <a-space :size="10">
       <a-upload
-        action="/"
+        :action="uploadUserAvatarUrl"
         :file-list="file ? [file] : []"
         :show-file-list="false"
+        :headers="uploadFile.headers"
+        @before-upload="uploadFile.avatarValidated"
         @change="onChange"
       >
         <template #upload-button>
@@ -55,10 +57,13 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import { useUserStore } from '@/store';
+import useUploadFile from '@/hooks/upload-file';
+import { uploadUserAvatarUrl } from '@/api/user';
 
 export default defineComponent({
   setup() {
     const userStore = useUserStore();
+    const uploadFile = useUploadFile();
     const file = reactive({
       uid: '-2',
       name: 'avatar.png',
@@ -67,15 +72,15 @@ export default defineComponent({
     const renderData = [
       {
         label: '用户名',
-        value: userStore.name,
+        value: userStore.nickName,
       },
       {
         label: '实名认证',
-        value: userStore.certification,
+        value: userStore.identityCard,
       },
       {
         label: '账号ID',
-        value: userStore.accountId,
+        value: userStore.userName,
       },
       {
         label: '手机号码',
@@ -83,16 +88,19 @@ export default defineComponent({
       },
       {
         label: '注册时间',
-        value: userStore.registrationDate,
+        value: userStore.createTime,
       },
     ];
     const onChange = (_: any, currentFile: any) => {
       file.url = URL.createObjectURL(currentFile.file);
+      userStore.setAvatar(file.url);
     };
     return {
       file,
+      uploadFile,
       renderData,
       onChange,
+      uploadUserAvatarUrl,
     };
   },
 });

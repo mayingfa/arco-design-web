@@ -1,6 +1,6 @@
 import { RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import { useUserStore } from '@/store';
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 
 export default function usePermission() {
   const userStore = useUserStore();

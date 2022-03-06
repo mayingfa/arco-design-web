@@ -1,6 +1,6 @@
 import { DirectiveBinding } from 'vue';
 import { useUserStore } from '@/store';
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 
 function checkPermission(el: HTMLElement, binding: DirectiveBinding) {
   const { value } = binding;

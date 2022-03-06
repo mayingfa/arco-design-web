@@ -18,13 +18,13 @@
           @submit="handleSubmit"
         >
           <a-form-item
-            field="username"
+            field="userName"
             :rules="[{ required: true, message: '用户名不能为空' }]"
             :validate-trigger="['change', 'blur']"
             hide-label
           >
             <a-input
-              v-model="userInfo.username"
+              v-model="userInfo.userName"
               placeholder="用户名：admin"
               @keyup.enter="handleSubmit"
             >
@@ -157,12 +157,12 @@ export default defineComponent({
     const { phoneRules } = useFormValidator();
     const rememberPassword = ref(true);
     const userInfo = reactive({
-      username: 'admin',
-      password: 'admin',
+      userName: '1325554003@qq.com',
+      password: '123456',
     });
     const phoneLogin = reactive({
-      phone: '15123456789',
-      authCode: '123456',
+      phone: '15233088662',
+      authCode: '',
     });
 
     // 发送短信验证码
@@ -181,7 +181,7 @@ export default defineComponent({
     // 记住密码
     const savePassword = () => {
       if (rememberPassword.value) {
-        localStorage.setItem(USER_NAME, userInfo.username);
+        localStorage.setItem(USER_NAME, userInfo.userName);
         localStorage.setItem(PASS_WORD, window.btoa(userInfo.password));
       } else {
         localStorage.removeItem(USER_NAME);
@@ -237,7 +237,7 @@ export default defineComponent({
       const username = localStorage.getItem(USER_NAME);
       const password = localStorage.getItem(PASS_WORD);
       if (username && password) {
-        userInfo.username = username;
+        userInfo.userName = username;
         userInfo.password = window.atob(password);
         rememberPassword.value = true;
       }

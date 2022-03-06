@@ -1,10 +1,14 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import { useUserStore } from '@/store';
+import { RenderContent } from '@arco-design/web-vue/es/_utils/types';
+import { getToken } from '@/utils/auth';
+
+let showMsg = true;
 
 export interface HttpResponse<T = unknown> {
   status: number;
-  msg: string;
+  message: string;
   code: number;
   data: T;
 }
@@ -16,6 +20,9 @@ axios.defaults.timeout = 5000;
 // 请求拦截器
 axios.interceptors.request.use(
   (config: AxiosRequestConfig) => {
+    if (config.headers && getToken()) {
+      config.headers.token = getToken() || '';
+    }
     return config;
   },
   (error) => {
@@ -27,35 +34,38 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
     const res = response.data;
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
-      Message.error({
-        content: res.msg || 'Error',
-        duration: 5 * 1000,
-      });
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+    if (res.code !== 200) {
       if (
-        [50008, 50012, 50014].includes(res.code) &&
-        response.config.url !== '/api/user/info'
+        [601, 602].includes(res.code) &&
+        response.config.url !== '/api/user/info' &&
+        showMsg
       ) {
-        Modal.error({
+        showMsg = false;
+        Modal.warning({
           title: '确认注销',
-          content: '您已退出登录，请重新登录',
+          content: res.data as RenderContent,
           okText: '确定',
+          maskClosable: false,
           async onOk() {
             const userStore = useUserStore();
-            await userStore.logout();
+            await userStore.clearCache();
+            showMsg = true;
             window.location.reload();
           },
         });
+      } else if (showMsg) {
+        Message.error({
+          content: (res.data as RenderContent) || 'Error',
+          duration: 5 * 1000,
+        });
       }
-      return Promise.reject(new Error(res.msg || 'Error'));
+      return Promise.reject(new Error(res.message || 'Error'));
     }
     return res;
   },
   (error) => {
     Message.error({
-      content: error.msg,
+      content: '请求失败',
       duration: 5 * 1000,
     });
     return Promise.reject(error);

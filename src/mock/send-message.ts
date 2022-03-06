@@ -7,7 +7,7 @@ import setupMock, {
 import { MockParams } from '@/types/mock';
 
 setupMock({
-  mock: true,
+  mock: false,
   setup() {
     // 送手机短信验证码
     Mock.mock(new RegExp('/api/send/phone-code'), (params: MockParams) => {
@@ -15,7 +15,7 @@ setupMock({
       if (phone === '15233088662') {
         return successResponseWrap('发送成功');
       }
-      return failResponseWrap(null, 50000, '发送失败');
+      return failResponseWrap(null, 500, '发送失败');
     });
   },
 });

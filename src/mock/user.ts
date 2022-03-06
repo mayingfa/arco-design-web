@@ -6,11 +6,11 @@ import setupMock, {
 
 import { MockParams } from '@/types/mock';
 import { isLogin } from '@/utils/auth';
-import { RoleEnum } from '@/enums/roleEnum';
+import { RoleEnum } from '@/enums/RoleEnum';
 import boyAvatar from '@/assets/svg/avatar-boy.svg?url';
 
 setupMock({
-  mock: true,
+  mock: false,
   setup() {
     // Mock.XHR.prototype.withCredentials = true;
 
@@ -44,10 +44,10 @@ setupMock({
     Mock.mock(new RegExp('/api/user/login'), (params: MockParams) => {
       const { username, password } = JSON.parse(params.body);
       if (!username) {
-        return failResponseWrap(null, 50000, '用户名不能为空');
+        return failResponseWrap(null, 500, '用户名不能为空');
       }
       if (!password) {
-        return failResponseWrap(null, 50000, '密码不能为空');
+        return failResponseWrap(null, 500, '密码不能为空');
       }
       if (username === 'admin' && password === 'admin') {
         window.localStorage.setItem('userRole', RoleEnum.ADMIN);
@@ -61,17 +61,17 @@ setupMock({
           token: '54321',
         });
       }
-      return failResponseWrap(null, 50000, '账号或者密码错误');
+      return failResponseWrap(null, 500, '账号或者密码错误');
     });
 
     // 手机号登录
     Mock.mock(new RegExp('/api/user/phone-login'), (params: MockParams) => {
       const { phone, authCode } = JSON.parse(params.body);
       if (!phone) {
-        return failResponseWrap(null, 50000, '手机号不能为空');
+        return failResponseWrap(null, 500, '手机号不能为空');
       }
       if (!authCode) {
-        return failResponseWrap(null, 50000, '验证码不能为空');
+        return failResponseWrap(null, 500, '验证码不能为空');
       }
       if (phone === '15123456789' && authCode === '123456') {
         window.localStorage.setItem('userRole', RoleEnum.ADMIN);
@@ -79,43 +79,43 @@ setupMock({
           token: '12345',
         });
       }
-      return failResponseWrap(null, 50000, '手机号或者验证码错误');
+      return failResponseWrap(null, 500, '手机号或者验证码错误');
     });
 
     // 注册账号
     Mock.mock(new RegExp('/api/user/register'), (params: MockParams) => {
       const { phone, authCode, password } = JSON.parse(params.body);
       if (!phone) {
-        return failResponseWrap(null, 50000, '手机号不能为空');
+        return failResponseWrap(null, 500, '手机号不能为空');
       }
       if (!authCode) {
-        return failResponseWrap(null, 50000, '验证码不能为空');
+        return failResponseWrap(null, 500, '验证码不能为空');
       }
       if (!password) {
-        return failResponseWrap(null, 50000, '密码不能为空');
+        return failResponseWrap(null, 500, '密码不能为空');
       }
       if (phone === '15123456789' && authCode === '123456') {
         return successResponseWrap('注册成功');
       }
-      return failResponseWrap(null, 50000, '手机号或者验证码错误');
+      return failResponseWrap(null, 500, '手机号或者验证码错误');
     });
 
     // 重置密码
     Mock.mock(new RegExp('/api/user/reset-password'), (params: MockParams) => {
       const { phone, authCode, newPassword } = JSON.parse(params.body);
       if (!phone) {
-        return failResponseWrap(null, 50000, '手机号不能为空');
+        return failResponseWrap(null, 500, '手机号不能为空');
       }
       if (!authCode) {
-        return failResponseWrap(null, 50000, '验证码不能为空');
+        return failResponseWrap(null, 500, '验证码不能为空');
       }
       if (!newPassword) {
-        return failResponseWrap(null, 50000, '新密码不能为空');
+        return failResponseWrap(null, 500, '新密码不能为空');
       }
       if (phone === '15123456789' && authCode === '123456') {
         return successResponseWrap('密码重置成功');
       }
-      return failResponseWrap(null, 50000, '手机号或者验证码错误');
+      return failResponseWrap(null, 500, '手机号或者验证码错误');
     });
 
     // 登出
